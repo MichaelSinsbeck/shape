@@ -6,7 +6,7 @@ function explanation.goto()
 		states.highscore.goto()
 		return
 	end
-	thisLevel = generateLevel(stages,level,level*10)
+	thisLevel = generateLevel(stages,level,level*1)
 	state = 'explanation'
 	started = false
 end
