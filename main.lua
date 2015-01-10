@@ -10,7 +10,7 @@ function newGame()
 	score = 0
 	level = 0
 
-	stages = newOrder(1,8,2)
+	stages = newOrder(1,8,1)
 	thisLevel = generateLevel(stages,level,level*10)
 	states.explanation.goto()
 end

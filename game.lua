@@ -70,30 +70,40 @@ function game.draw()
 	if love.keyboard.isDown('tab') then -- if tab is held: show order
 		game.drawOrder()
 	else
+		-- box around score
+		love.graphics.setColor(35,35,45)
+		love.graphics.rectangle('fill',0,0,260,140)
+		-- total score
 		love.graphics.setColor(200,200,200)
 		love.graphics.setFont(largeFont)
-		love.graphics.printf(score,0,50,250,'right')
+		love.graphics.printf(score,0,20,230,'right')
 		
+		-- new score
 		local height = timerToScore(timer)
 		love.graphics.setLineWidth(2)
-		love.graphics.rectangle('line',50,120,200,30)
-		love.graphics.rectangle('fill',250-2*height,120,2*height,30)
+		love.graphics.rectangle('line',30,80,200,30)
+		love.graphics.rectangle('fill',230-2*height,80,2*height,30)
 		love.graphics.setFont(smallFont)
 		love.graphics.setColor(155,155,155)
-		love.graphics.printf(height,150,124,98,'right')
+		love.graphics.printf(height,130,84,98,'right')
+		-- press tab
 		love.graphics.setFont(tinyFont)
 		love.graphics.setColor(200,200,200)
-		love.graphics.printf('Press "tab" to see ordering',50,156,200,'left')
+		love.graphics.printf('Hold "tab" to see ordering',30,116,200,'left')
 		
+		-- box around current shape
 		love.graphics.setColor(35,35,45)
-		love.graphics.rectangle('fill',180,380,140,140)
+		love.graphics.rectangle('fill',0,380,500,140)
+		-- all the shapes
 		for i = #thisLevel,1,-1 do
 				v = thisLevel[i]
 				local factor = 2
 				local z = (i+offset-1)/factor + 1
 				local y = 20 + 430/z
 				local x = 400 - math.exp(-(z-1)) * 150
-				drawShape(x,y,v.color,v.shape,v.fill,1/z)
+				local fade = 1
+				if i>1 then fade = math.exp(0.15*(1-i)) end
+				drawShape(x,y,v.color,v.shape,v.fill,1/z,fade)
 		end
 	end
 	

@@ -184,14 +184,15 @@ function initShapes()
 	end
 end
 
-function drawShape(x,y,colorIdx,shapeIdx,fillIdx,scale,alpha)
+function drawShape(x,y,colorIdx,shapeIdx,fillIdx,scale,fade)
 	local thisScale = scale or 1
 	thisScale = thisScale * 50
 	local lineWidth = 5
-	local r = color[colorIdx][1]
-	local g = color[colorIdx][2]
-	local b = color[colorIdx][3]
-	local alpha = alpha or 255
+	local fade = fade or 1
+	local r = color[colorIdx][1]*fade + (1-fade) * 25
+	local g = color[colorIdx][2]*fade + (1-fade) * 25
+	local b = color[colorIdx][3]*fade + (1-fade) * 35
+
 
 	love.graphics.origin()
 	love.graphics.translate(x,y)

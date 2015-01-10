@@ -6,7 +6,7 @@ function explanation.goto()
 		states.highscore.goto()
 		return
 	end
-	thisLevel = generateLevel(stages,level,level*1)
+	thisLevel = generateLevel(stages,level,level*10)
 	state = 'explanation'
 	started = false
 end
@@ -28,7 +28,7 @@ function explanation.draw()
 	love.graphics.printf('Press "' .. button ..'" to continue',0,550,500,'center')
 	
 	love.graphics.setColor(35,35,45)
-	love.graphics.rectangle('fill',180,380,140,140)
+	love.graphics.rectangle('fill',0,380,500,140)
 	
 
 	drawShape(250,450,v.color,v.shape,v.fill,1)
