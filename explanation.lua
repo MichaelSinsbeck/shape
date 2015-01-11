@@ -12,7 +12,9 @@ function explanation.goto()
 end
 
 function explanation.draw()
-	states.game.drawOrder()
+	if level > 1 then
+		states.game.drawOrder()
+	end
 
 	local v = stages[level]
 	if v.direction == 1 then

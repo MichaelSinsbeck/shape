@@ -171,9 +171,6 @@ function initShapes()
 		table.insert(outline[8],cy -r*math.sin(angle))
 	end
 	
-	
-	
-	
 	insides = {}
 	for i=1,#outline do
 		if love.math.isConvex(outline[i]) then

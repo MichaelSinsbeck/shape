@@ -54,15 +54,15 @@ function game.drawOrder()
 		local dir = v.direction
 		local x
 		local y
-		local nCol = 3
+		local nCol = 2
 
-		x = 200-(count[dir] % nCol)*55
-		y = math.floor(count[dir]/nCol)*55+75
+		x = 180-(count[dir] % nCol)*80
+		y = math.floor(count[dir]/nCol)*80+75
 		if dir == 2 then x = 500 - x end
 		
 		count[dir] = count[dir] + 1			
 		
-		drawShape(x,y,v.color,v.shape,v.fill,0.5)
+		drawShape(x,y,v.color,v.shape,v.fill,0.7)
 	end
 end
 
