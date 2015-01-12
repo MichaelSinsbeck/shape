@@ -12,11 +12,19 @@ function explanation.goto()
 	thisLevel = generateLevel(stages,level,level*10)
 	state = 'explanation'
 	started = false
+	aboutToQuit = false
 end
 
 function explanation.draw()
 	if level > 1 then
 		states.game.drawOrder()
+	else
+		love.graphics.setColor(230,230,230)
+		love.graphics.setFont(largeFont)
+		love.graphics.setColor(200,200,200)
+		love.graphics.printf('Instructions',0,20,500,'center')
+		love.graphics.setFont(smallFont)
+		love.graphics.printf('Sort the shapes with "left" and "right"\n\nForgot the shapes? Press "tab"\n\nBe fast for higher score',0,120,500,'center')		
 	end
 	love.graphics.setColor(200,200,200)
 	local v = stages[level]

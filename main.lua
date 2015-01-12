@@ -26,9 +26,11 @@ function love.load()
 	
 	loadSounds()
 	
-	largeFont = love.graphics.newFont(50)
-	smallFont = love.graphics.newFont(20)
-	tinyFont = love.graphics.newFont(10)
+--	'CaviarDreams.ttf'
+	logo = love.graphics.newImage('logo_small.png')
+	largeFont = love.graphics.newFont('CaviarDreams.ttf',50)
+	smallFont = love.graphics.newFont('Caviar_Dreams_Bold.ttf',20)
+	tinyFont = love.graphics.newFont('Caviar_Dreams_Bold.ttf',11)
 	love.graphics.setFont(largeFont)
 	states.menu.goto()
 

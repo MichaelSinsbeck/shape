@@ -60,8 +60,9 @@ end
 
 function modeselect.draw()
 	love.graphics.setFont(largeFont)
-	love.graphics.setColor(200,200,200)
+	love.graphics.setColor(230,230,230)
 	love.graphics.printf('Select mode',0,20,500,'center')
+	love.graphics.setColor(200,200,200)
 	for k,v in ipairs(modi) do
 		love.graphics.printf(v.name,200,k*50+50,350,'left')
 	end

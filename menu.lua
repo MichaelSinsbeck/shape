@@ -37,12 +37,25 @@ end
 
 function menu.draw()
 	love.graphics.setFont(largeFont)
-	love.graphics.setColor(200,200,200)
+	love.graphics.setColor(230,230,230)
+	love.graphics.printf('Shape and Color',0,20,500,'center')
+	
+	love.graphics.setColor(200,200,200)	
 	for k,v in ipairs(options) do
 		love.graphics.printf(v.caption,200,k*50+50,350,'left')
 	end
 	drawShape(140,selection*50+23+60
 	,cursor.color,cursor.shape,cursor.fill,0.4)
+	
+	-- box
+	love.graphics.setColor(35,35,45)
+	love.graphics.rectangle('fill',0,380,500,140)	
+	
+	love.graphics.setColor(230,230,230)
+	love.graphics.draw(logo,410,450,0,1,1,50,50)
+	love.graphics.setColor(200,200,200)
+	love.graphics.setFont(smallFont)
+	love.graphics.printf('A game by Michael Sinsbeck',0,470,400,'center')
 end
 
 function menu.update(dt)

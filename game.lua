@@ -23,6 +23,7 @@ function registerKey(key)
 		playSound('check')
 	else
 		playSound('error')
+		score = score - 100
 	end
 	table.remove(thisLevel,1)
 	if #thisLevel == 0 then
