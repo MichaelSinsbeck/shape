@@ -4,6 +4,7 @@ states.explanation = require('explanation')
 states.highscore = require('highscore')
 states.menu = require('menu')
 states.modeselect = require('modeselect')
+states.custom = require('custom')
 require('shape')
 require('sound')
 
@@ -13,10 +14,9 @@ function newGame()
 	score = 0
 	level = 0
 
-	stages = newOrder(2,2,2)
 	thisLevel = generateLevel(stages,level,level*10)
-	--states.explanation.goto()
-	states.menu.goto()
+	states.explanation.goto()
+
 end
 
 function love.load()
@@ -32,8 +32,7 @@ function love.load()
 	smallFont = love.graphics.newFont(20)
 	tinyFont = love.graphics.newFont(10)
 	love.graphics.setFont(largeFont)
-	newGame()
-	
+	states.menu.goto()
 
 end
 

@@ -45,9 +45,7 @@ function explanation.keypressed(key)
 		state = 'game'
 		offset = 0
 		timer = 0
-		local soundId = love.math.random(#sound_check)
-		sound_check[soundId]:rewind()
-		sound_check[soundId]:play()
+		playSound('check')
 	end
 end
 

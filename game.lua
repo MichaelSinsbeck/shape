@@ -12,12 +12,9 @@ function registerKey(key)
 	started = true
 	if thisLevel[1].direction == key then
 		score = score + timerToScore(timer)
-		local soundId = love.math.random(#sound_check)
-		sound_check[soundId]:rewind()
-		sound_check[soundId]:play()
+		playSound('check')
 	else
-		sound_error:rewind()
-		sound_error:play()
+		playSound('error')
 	end
 	table.remove(thisLevel,1)
 	if #thisLevel == 0 then

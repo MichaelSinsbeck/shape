@@ -20,7 +20,7 @@ end
 
 function highscore.keypressed(key)
 	if key == 'return' then
-		newGame()
+		states.modeselect.goto()
 	end
 end
 

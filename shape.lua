@@ -10,8 +10,11 @@ local function randomPermutation(n)
 	return perm
 end
 
-function newOrder(nColor,nShape,nFill)
+function newOrder(nColor,nShape,nFill,nLevels)
 	nStages = nColor*nShape*nFill
+	if nLevels > nStages then
+		nLevels = nStages
+	end
 	stages = {}
 	-- randomly select some shapes, colors, fillstyles
 	colorPerm = randomPermutation(#color)
@@ -41,7 +44,7 @@ function newOrder(nColor,nShape,nFill)
 	stages[1].direction = first
 	count={0,0}
 	count[first] = 1
-	for i=2,#stages do
+	for i=2,nLevels do
 		local thisDirection
 		if love.math.random() < count[1]/(count[1]+count[2]) then
 			thisDirection = 2
@@ -50,6 +53,9 @@ function newOrder(nColor,nShape,nFill)
 		end
 			count[thisDirection] = count[thisDirection] + 1 
 			stages[i].direction = thisDirection
+	end
+	for i=nLevels+1,nStages do
+		stages[i] = nil
 	end
 	
 	--for k,v in ipairs(stages) do

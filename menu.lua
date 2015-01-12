@@ -1,7 +1,6 @@
 local menu = {}
 local selection = 1
 local options
-local textcolor = 1
 local cursor
 
 function menu.init()
@@ -33,21 +32,17 @@ function menu.goto()
 	cursor.shape = love.math.random(#outline)
 	cursor.color = love.math.random(#color)
 	cursor.fill = love.math.random(2)
-	textcolor = love.math.random(#color)
-	while textcolor == cursor.color do
-		textcolor = love.math.random(#color)
-	end
 	state = 'menu'
 end
 
 function menu.draw()
 	love.graphics.setFont(largeFont)
-	local r,g,b = color[textcolor][1],color[textcolor][2],color[textcolor][3]
-	love.graphics.setColor(r,g,b)
+	love.graphics.setColor(200,200,200)
 	for k,v in ipairs(options) do
-		love.graphics.printf(v.caption,150,k*60,350,'left')
+		love.graphics.printf(v.caption,200,k*50+50,350,'left')
 	end
-	drawShape(100,selection*60+30,cursor.color,cursor.shape,cursor.fill,0.5)
+	drawShape(140,selection*50+20+60
+	,cursor.color,cursor.shape,cursor.fill,0.5)
 end
 
 function menu.update(dt)
