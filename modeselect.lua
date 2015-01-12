@@ -65,7 +65,7 @@ function modeselect.draw()
 	for k,v in ipairs(modi) do
 		love.graphics.printf(v.name,200,k*50+50,350,'left')
 	end
-	drawShape(140,selection*50+20+60, cursor.color,cursor.shape,cursor.fill,0.5)
+	drawShape(140,selection*50+23+60, cursor.color,cursor.shape,cursor.fill,0.4)
 	
 	-- Box
 	love.graphics.setColor(35,35,45)

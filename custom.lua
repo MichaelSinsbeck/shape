@@ -22,7 +22,7 @@ function custom.draw()
 	love.graphics.printf('return - start game',0,365,500,'center')
 	
 	-- Descriptions
-	local maxLevels = customMode.nColor*customMode.nShape*customMode.nFill
+	local maxLevels = math.min(customMode.nColor*customMode.nShape*customMode.nFill,16)
 	love.graphics.setFont(smallFont)
 	love.graphics.printf('Levels',0,390,165,'right')
 	love.graphics.printf(customMode.nLevels.. ' (max ' .. maxLevels .. ')',200,390,200,'left')	
@@ -82,8 +82,8 @@ function custom.keypressed(key)
 		elseif selection == 4 then
 			customMode.nFill = math.max(customMode.nFill-1,1)
 		end
-		customMode.nLevels = math.min(customMode.nLevels,
-			customMode.nColor*customMode.nShape*customMode.nFill)
+		local maxLevels = math.min(customMode.nColor*customMode.nShape*customMode.nFill,16)
+		customMode.nLevels = math.min(customMode.nLevels,maxLevels)
 	elseif key == 'right' then
 		if selection == 1 then
 			customMode.nLevels = customMode.nLevels + 1
@@ -94,8 +94,12 @@ function custom.keypressed(key)
 		elseif selection == 4 then
 			customMode.nFill = math.min(customMode.nFill+1,2)
 		end
-		customMode.nLevels = math.min(customMode.nLevels,
-			customMode.nColor*customMode.nShape*customMode.nFill)
+		local maxLevels = math.min(customMode.nColor*customMode.nShape*customMode.nFill,16)
+		customMode.nLevels = math.min(customMode.nLevels,maxLevels)
+	elseif key == 'return' then
+		playSound('select')
+		stages = newOrder(customMode.nColor, customMode.nShape, customMode.nFill, customMode.nLevels)
+			newGame()
 	end
 end
 

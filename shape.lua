@@ -46,13 +46,19 @@ function newOrder(nColor,nShape,nFill,nLevels)
 	count[first] = 1
 	for i=2,nLevels do
 		local thisDirection
-		if love.math.random() < count[1]/(count[1]+count[2]) then
+		if count[2] >= nLevels/2 then
+			thisDirection = 1
+		elseif count[1] >= nLevels/2 then
 			thisDirection = 2
 		else
-			thisDirection = 1
+			if love.math.random() < count[1]/(count[1]+count[2]) then
+				thisDirection = 2
+			else
+				thisDirection = 1
+			end
 		end
-			count[thisDirection] = count[thisDirection] + 1 
-			stages[i].direction = thisDirection
+		count[thisDirection] = count[thisDirection] + 1 
+		stages[i].direction = thisDirection
 	end
 	for i=nLevels+1,nStages do
 		stages[i] = nil

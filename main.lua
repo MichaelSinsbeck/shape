@@ -14,9 +14,8 @@ function newGame()
 	score = 0
 	level = 0
 
-	thisLevel = generateLevel(stages,level,level*10)
+	thisLevel = generateLevel(stages,level,level*1)
 	states.explanation.goto()
-
 end
 
 function love.load()

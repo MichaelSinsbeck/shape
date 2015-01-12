@@ -1,4 +1,12 @@
 local game = {}
+local aboutToQuit
+
+function game.goto()
+	state = 'game'
+	offset = 0
+	timer = 0
+	aboutToQuit = false
+end
 
 function timerToScore(timer)
 	-- linear score
@@ -26,6 +34,15 @@ function registerKey(key)
 end
 
 function game.keypressed(key)
+	if key == 'escape' then
+		if not aboutToQuit then
+			aboutToQuit = true
+		else
+			states.modeselect.goto()
+		end
+	else
+		aboutToQuit = false
+	end
 	if key == 'left' then
 		registerKey(1)
 	elseif key == 'right' then
@@ -64,7 +81,8 @@ function game.drawOrder()
 end
 
 function game.draw()
-	if love.keyboard.isDown('tab') then -- if tab is held: show order
+	-- if tab is held: show order
+	if love.keyboard.isDown('tab') then
 		game.drawOrder()
 	else
 		-- box around score
@@ -87,6 +105,11 @@ function game.draw()
 		love.graphics.setFont(tinyFont)
 		love.graphics.setColor(200,200,200)
 		love.graphics.printf('Hold "tab" to see ordering',30,116,200,'left')
+		-- press escape again to quit
+		if aboutToQuit then
+			love.graphics.setFont(tinyFont)
+		love.graphics.printf('Press "esc" again to quit',2,2,498,'left')
+		end
 		
 		-- box around current shape
 		love.graphics.setColor(35,35,45)

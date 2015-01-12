@@ -41,8 +41,8 @@ function menu.draw()
 	for k,v in ipairs(options) do
 		love.graphics.printf(v.caption,200,k*50+50,350,'left')
 	end
-	drawShape(140,selection*50+20+60
-	,cursor.color,cursor.shape,cursor.fill,0.5)
+	drawShape(140,selection*50+23+60
+	,cursor.color,cursor.shape,cursor.fill,0.4)
 end
 
 function menu.update(dt)
