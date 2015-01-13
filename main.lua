@@ -28,7 +28,8 @@ function love.load()
 	
 --	'CaviarDreams.ttf'
 	logo = love.graphics.newImage('logo_small.png')
-	largeFont = love.graphics.newFont('CaviarDreams.ttf',50)
+	largeFont = love.graphics.newFont('CaviarDreams.ttf',50)	
+--	largeFont = love.graphics.newFont('Caviar_Dreams_Bold.ttf',50)
 	smallFont = love.graphics.newFont('Caviar_Dreams_Bold.ttf',20)
 	tinyFont = love.graphics.newFont('Caviar_Dreams_Bold.ttf',11)
 	love.graphics.setFont(largeFont)
