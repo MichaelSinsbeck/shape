@@ -22,10 +22,10 @@ function highscore.draw()
 	love.graphics.setFont(largeFont)	
 	love.graphics.printf('game over',0,390,500,'center')
 	love.graphics.setFont(largeFont)
---	love.graphics.printf('score:',50,450,400,'left')
+
+	love.graphics.setColor(colorEmph)
 	love.graphics.printf(score,0,450,500,'center')
-	love.graphics.setFont(smallFont)
-	--love.graphics.printf('Press "return" to start a new game',0,450,500,'center')
+
 
 end
 

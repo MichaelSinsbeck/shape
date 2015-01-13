@@ -126,6 +126,9 @@ function game.draw()
 		-- box around score
 		love.graphics.setColor(colorBox)
 		love.graphics.rectangle('fill',0,0,260,140)
+		love.graphics.setColor(colorFG)
+		love.graphics.setLineWidth(2)
+		love.graphics.rectangle('line',-5,-5,265,145)				
 		-- total score
 		love.graphics.setColor(colorFG)
 		love.graphics.setFont(largeFont)
