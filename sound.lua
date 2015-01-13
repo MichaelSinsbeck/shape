@@ -7,10 +7,11 @@ local function addSound(name,filename)
 end
 
 function loadSounds()
-	addSound('check','Woosh-Mark_DiAngelo-4778593.wav')
+--	addSound('check','Woosh-Mark_DiAngelo-4778593.wav')
+	addSound('check','Blop-Mark_DiAngelo-79054334.wav')	
 	--addSound('check','whip-whoosh-03.wav')
-	addSound('move','Blop-Mark_DiAngelo-79054334.wav')
-	addSound('select','button-21.wav')
+	addSound('move','Woosh-Mark_DiAngelo-4778593.wav')
+	addSound('select','button-20.wav')
 	addSound('error','beep-10.wav')
 
 --[[	table.insert(sound_check,love.audio.newSource('Woosh-Mark_DiAngelo-4778593.wav','static')	)
@@ -21,11 +22,13 @@ function loadSounds()
 	sound_error = love.audio.newSource('beep-10.wav','static')]]	
 end
 
-function playSound(name)
+function playSound(name,pitch)
+	local pitch = pitch or 1
 	if soundOn and sounds[name] then
 		local idx = love.math.random(#sounds[name])
 		local thisSource = sounds[name][idx]
 		thisSource:rewind()
+		thisSource:setPitch(pitch)
 		thisSource:play()
 	end
 end

@@ -3,6 +3,9 @@ local aboutToQuit
 local swipes = {}
 local levelOver = false
 local endTimer = 0
+local comboCount = 0
+local comboPoint
+local maxPt = 0
 
 function game.goto()
 	state = 'game'
@@ -12,29 +15,45 @@ function game.goto()
 	aboutToQuit = false
 	levelOver = false
 	endTimer = 0
+	comboCount = 0
+	comboPoint = 0
 end
 
 function timerToScore(timer)
 	-- linear score
 	--local thisScore = math.floor(math.min(math.max(0,1.2-timer),1) * 100)
 	-- exponential decay
-	local thisScore = math.floor(100 * math.min(math.exp(-timer+0.2),1))
+	local thisScore = math.floor(comboPoint * math.min(math.exp(-timer+0.2),1))
 	return thisScore
 end
 
 function registerKey(key)
 	started = true
 	if thisLevel[1].direction == key then
-		score = score + timerToScore(timer)
-		playSound('check')
+		local scoreToAdd = timerToScore(timer)
+		score = score + scoreToAdd
+		comboPoint = scoreToAdd + 10
+		maxPt = math.max(maxPt,comboPoint)
+		print('Max: ' .. maxPt)
+		comboCount = comboCount + 1
+		local pitch
+		if comboCount <= 36 then
+			pitch = 2^(comboCount/12-2)
+		else
+--			pitch = 2^(comboCount/24)
+			pitch = 2
+		end
+		playSound('check',pitch)
+		
 		local thisShape = table.remove(thisLevel,1)
 		local xTarget
 		if key == 1 then xTarget = -50 else xTarget = 550 end
 		table.insert(swipes,{shape = thisShape,x=250,xTarget=xTarget})
 	else
 		playSound('error')
-		score = score - 100
-		local thisShape = table.remove(thisLevel,1)		
+		comboPoint = 0
+		comboCount = 0
+		table.remove(thisLevel,1)	
 	end
 	if #thisLevel == 0 then
 		levelOver = true
@@ -139,6 +158,7 @@ function game.draw()
 		love.graphics.setLineWidth(2)
 		love.graphics.rectangle('line',30,80,200,30)
 		love.graphics.rectangle('fill',230-2*height,80,2*height,30)
+		love.graphics.rectangle('fill',460,360-0.3*height,30,0.3*height)		
 		love.graphics.setFont(smallFont)
 		love.graphics.setColor(colorEmph)
 		love.graphics.printf(height,30,84,200,'center')
