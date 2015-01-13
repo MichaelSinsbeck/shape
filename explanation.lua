@@ -85,7 +85,7 @@ function explanation.keypressed(key)
 		aboutToQuit = false
 	end
 	if key == button then
-		playSound('check')
+		playSound('select')
 		states.game.goto()
 	end
 end

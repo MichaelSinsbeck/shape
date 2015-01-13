@@ -3,7 +3,6 @@ local aboutToQuit
 local swipes = {}
 local levelOver = false
 local endTimer = 0
-local comboCount = 0
 local comboPoint
 local maxPt = 0
 
@@ -15,8 +14,9 @@ function game.goto()
 	aboutToQuit = false
 	levelOver = false
 	endTimer = 0
-	comboCount = 0
-	comboPoint = 0
+	if level == 1 then
+		comboPoint = 0
+	end
 end
 
 function timerToScore(timer)
@@ -35,14 +35,7 @@ function registerKey(key)
 		comboPoint = scoreToAdd + 10
 		maxPt = math.max(maxPt,comboPoint)
 		print('Max: ' .. maxPt)
-		comboCount = comboCount + 1
-		local pitch
-		if comboCount <= 36 then
-			pitch = 2^(comboCount/12-2)
-		else
---			pitch = 2^(comboCount/24)
-			pitch = 2
-		end
+		local pitch = 2^((comboPoint-10)/160)*0.75
 		playSound('check',pitch)
 		
 		local thisShape = table.remove(thisLevel,1)
@@ -52,15 +45,11 @@ function registerKey(key)
 	else
 		playSound('error')
 		comboPoint = 0
-		comboCount = 0
 		table.remove(thisLevel,1)	
 	end
 	if #thisLevel == 0 then
 		levelOver = true
 		started = false
-		--timer = 0
---		states.explanation.goto()
-		return
 	end
 	timer = 0
 	offset = 1
@@ -155,13 +144,14 @@ function game.draw()
 		
 		-- new score
 		local height = timerToScore(timer)
+		height = math.min(height,600)
 		love.graphics.setLineWidth(2)
 		love.graphics.rectangle('line',30,80,200,30)
-		love.graphics.rectangle('fill',230-2*height,80,2*height,30)
-		love.graphics.rectangle('fill',460,360-0.3*height,30,0.3*height)		
+		love.graphics.rectangle('fill',230-height/3,80,height/3,30)
+--		love.graphics.rectangle('fill',460,360-0.3*height,30,0.3*height)		
 		love.graphics.setFont(smallFont)
 		love.graphics.setColor(colorEmph)
-		love.graphics.printf(height,30,84,200,'center')
+		love.graphics.printf(height,33,84,194,'right')
 		-- press tab
 		love.graphics.setFont(tinyFont)
 		love.graphics.setColor(colorFG)
