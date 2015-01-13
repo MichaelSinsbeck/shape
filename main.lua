@@ -19,22 +19,30 @@ end
 
 function love.load()
 
-	soundOn = true
-	offset = 0
-	love.graphics.setBackgroundColor(25,25,35)
-	initShapes()
+
+
 	
+	-- initialize
+	soundOn = true
+	initShapes()
 	loadSounds()
 	
---	'CaviarDreams.ttf'
+	-- define some colors
+	colorBG = {25,25,35}
+	colorBox = {45,45,55}
+	colorFG = {180,180,180}
+	colorEmph = {250,250,250}
+	
+	love.graphics.setBackgroundColor(colorBG)
+	
+	-- load fonts and logo
 	logo = love.graphics.newImage('logo_small.png')
 	largeFont = love.graphics.newFont('CaviarDreams.ttf',50)	
---	largeFont = love.graphics.newFont('Caviar_Dreams_Bold.ttf',50)
 	smallFont = love.graphics.newFont('Caviar_Dreams_Bold.ttf',20)
 	tinyFont = love.graphics.newFont('Caviar_Dreams_Bold.ttf',11)
-	love.graphics.setFont(largeFont)
-	states.menu.goto()
 
+	-- start game in menu
+	states.menu.goto()
 end
 
 

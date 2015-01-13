@@ -12,12 +12,12 @@ end
 
 function custom.draw()
 	-- Box
-	love.graphics.setColor(35,35,45)
+	love.graphics.setColor(colorBox)
 	love.graphics.rectangle('fill',0,380,500,140)
 
 	-- Explanation
 	love.graphics.setFont(tinyFont)
-	love.graphics.setColor(200,200,200)
+	love.graphics.setColor(colorFG)
 	love.graphics.printf('left/right - change value',0,355,500,'center')
 	love.graphics.printf('return - start game',0,365,500,'center')
 	
@@ -33,7 +33,7 @@ function custom.draw()
 	drawShape(182,selection*30+360+12, cursor.color,cursor.shape,cursor.fill,0.2)
 	
 	love.graphics.setLineWidth(2)
-	love.graphics.setColor(200,200,200)	
+	love.graphics.setColor(colorFG)	
 	for i=1,#color do
 		love.graphics.rectangle('line',200+(i-1)*27,420,23,23)
 	end

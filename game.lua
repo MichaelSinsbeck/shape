@@ -97,7 +97,7 @@ end
 
 function game.drawOrder()
 	love.graphics.setFont(smallFont)
-	love.graphics.setColor(200,200,200)
+	love.graphics.setColor(colorFG)
 	love.graphics.printf('left',0,10,225,'right')
 	love.graphics.printf('right',275,10,200,'left')
 	local count = {0,0}
@@ -124,10 +124,10 @@ function game.draw()
 		game.drawOrder()
 	else
 		-- box around score
-		love.graphics.setColor(35,35,45)
+		love.graphics.setColor(colorBox)
 		love.graphics.rectangle('fill',0,0,260,140)
 		-- total score
-		love.graphics.setColor(200,200,200)
+		love.graphics.setColor(colorFG)
 		love.graphics.setFont(largeFont)
 		love.graphics.printf(score,0,20,230,'right')
 		
@@ -137,11 +137,11 @@ function game.draw()
 		love.graphics.rectangle('line',30,80,200,30)
 		love.graphics.rectangle('fill',230-2*height,80,2*height,30)
 		love.graphics.setFont(smallFont)
-		love.graphics.setColor(155,155,155)
-		love.graphics.printf(height,130,84,98,'right')
+		love.graphics.setColor(colorEmph)
+		love.graphics.printf(height,30,84,200,'center')
 		-- press tab
 		love.graphics.setFont(tinyFont)
-		love.graphics.setColor(200,200,200)
+		love.graphics.setColor(colorFG)
 		love.graphics.printf('Hold "tab" to see ordering',30,116,200,'left')
 		-- press escape again to quit
 		if aboutToQuit then
@@ -150,7 +150,7 @@ function game.draw()
 		end
 		
 		-- box around current shape
-		love.graphics.setColor(35,35,45)
+		love.graphics.setColor(colorBox)
 		love.graphics.rectangle('fill',0,380,500,140)
 		-- all the shapes
 		for i = #thisLevel,1,-1 do

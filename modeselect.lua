@@ -60,20 +60,20 @@ end
 
 function modeselect.draw()
 	love.graphics.setFont(largeFont)
-	love.graphics.setColor(230,230,230)
+	love.graphics.setColor(colorEmph)
 	love.graphics.printf('Select mode',0,20,500,'center')
-	love.graphics.setColor(200,200,200)
+	love.graphics.setColor(colorFG)
 	for k,v in ipairs(modi) do
 		love.graphics.printf(v.name,200,k*50+50,350,'left')
 	end
 	drawShape(140,selection*50+23+60, cursor.color,cursor.shape,cursor.fill,0.4)
 	
 	-- Box
-	love.graphics.setColor(35,35,45)
+	love.graphics.setColor(colorBox)
 	love.graphics.rectangle('fill',0,380,500,140)
 	
 	-- Descriptions
-	love.graphics.setColor(200,200,200)
+	love.graphics.setColor(colorFG)
 	love.graphics.setFont(smallFont)
 	love.graphics.printf('Levels',0,390,165,'right')
 	love.graphics.printf(modi[selection].nLevels,200,390,200,'left')	

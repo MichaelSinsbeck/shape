@@ -8,11 +8,11 @@ function highscore.draw()
 	-- shapes from before
 	states.game.drawOrder()
 	-- box
-	love.graphics.setColor(35,35,45)
+	love.graphics.setColor(colorBox)
 	love.graphics.rectangle('fill',0,380,500,140)
 	
 	-- what key to press
-	love.graphics.setColor(200,200,200)
+	love.graphics.setColor(colorFG)
 	love.graphics.setFont(smallFont)
 	love.graphics.printf('press "return"',0,355,500,'center')
 

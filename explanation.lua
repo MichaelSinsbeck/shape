@@ -19,14 +19,14 @@ function explanation.draw()
 	if level > 1 then
 		states.game.drawOrder()
 	else
-		love.graphics.setColor(230,230,230)
+		love.graphics.setColor(colorEmph)
 		love.graphics.setFont(largeFont)
-		love.graphics.setColor(200,200,200)
+		love.graphics.setColor(colorFG)
 		love.graphics.printf('Instructions',0,20,500,'center')
 		love.graphics.setFont(smallFont)
 		love.graphics.printf('Sort the shapes with "left" and "right"\n\nForgot the shapes? Press "tab"\n\nBe fast for higher score',0,120,500,'center')		
 	end
-	love.graphics.setColor(200,200,200)
+	love.graphics.setColor(colorFG)
 	local v = stages[level]
 	if v.direction == 1 then
 		button = 'left'
@@ -45,13 +45,13 @@ function explanation.draw()
 	love.graphics.setFont(smallFont)
 	love.graphics.printf('Press "' .. button ..'" to continue',0,355,500,'center')
 	
-	love.graphics.setColor(35,35,45)
+	love.graphics.setColor(colorBox)
 	love.graphics.rectangle('fill',0,380,500,140)
 	
 
 	drawShape(250,450,v.color,v.shape,v.fill,1)
 	
-	love.graphics.setColor(200,200,200)
+	love.graphics.setColor(colorFG)
 	love.graphics.setLineWidth(8)
 	if v.direction == 1 then
 		love.graphics.polygon('line',
