@@ -10,11 +10,14 @@ function highscore.draw()
 	-- box
 	love.graphics.setColor(colorBox)
 	love.graphics.rectangle('fill',0,380,500,140)
+	love.graphics.setColor(colorFG)
+	love.graphics.setLineWidth(2)
+	love.graphics.line(0,380,500,380)		
 	
 	-- what key to press
 	love.graphics.setColor(colorFG)
 	love.graphics.setFont(smallFont)
-	love.graphics.printf('press "return"',0,355,500,'center')
+	love.graphics.printf('press "return"',0,352,500,'center')
 
 	love.graphics.setFont(largeFont)	
 	love.graphics.printf('game over',0,390,500,'center')

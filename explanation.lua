@@ -9,7 +9,7 @@ function explanation.goto()
 		return
 	end
 	level = level + 1
-	thisLevel = generateLevel(stages,level,level*10)
+	thisLevel = generateLevel(stages,level,level*5)
 	state = 'explanation'
 	started = false
 	aboutToQuit = false
@@ -21,10 +21,10 @@ function explanation.draw()
 	else
 		love.graphics.setColor(colorEmph)
 		love.graphics.setFont(largeFont)
-		love.graphics.setColor(colorFG)
 		love.graphics.printf('Instructions',0,20,500,'center')
+		love.graphics.setColor(colorFG)		
 		love.graphics.setFont(smallFont)
-		love.graphics.printf('Sort the shapes with "left" and "right"\n\nForgot the shapes? Press "tab"\n\nBe fast for higher score',0,120,500,'center')		
+		love.graphics.printf('Sort the shapes with "left" and "right"\n\nForgot the shapes? Press "tab"\n\nBe fast and accurate for higher score',0,120,500,'center')		
 	end
 	love.graphics.setColor(colorFG)
 	local v = stages[level]
@@ -42,15 +42,21 @@ function explanation.draw()
 		love.graphics.printf('Press "esc" again to quit',2,2,498,'left')
 	end
 	
+	-- press to continue
 	love.graphics.setFont(smallFont)
-	love.graphics.printf('Press "' .. button ..'" to continue',0,355,500,'center')
+	love.graphics.printf('Press "' .. button ..'" to continue',0,352,500,'center')
 	
+	-- Box
 	love.graphics.setColor(colorBox)
 	love.graphics.rectangle('fill',0,380,500,140)
+	love.graphics.setColor(colorFG)
+	love.graphics.setLineWidth(2)
+	love.graphics.line(0,380,500,380)		
 	
 
 	drawShape(250,450,v.color,v.shape,v.fill,1)
 	
+	-- arrow
 	love.graphics.setColor(colorFG)
 	love.graphics.setLineWidth(8)
 	if v.direction == 1 then

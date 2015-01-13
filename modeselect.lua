@@ -71,6 +71,9 @@ function modeselect.draw()
 	-- Box
 	love.graphics.setColor(colorBox)
 	love.graphics.rectangle('fill',0,380,500,140)
+	love.graphics.setColor(colorFG)
+	love.graphics.setLineWidth(2)
+	love.graphics.line(0,380,500,380)		
 	
 	-- Descriptions
 	love.graphics.setColor(colorFG)

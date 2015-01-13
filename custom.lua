@@ -14,12 +14,15 @@ function custom.draw()
 	-- Box
 	love.graphics.setColor(colorBox)
 	love.graphics.rectangle('fill',0,380,500,140)
+	love.graphics.setColor(colorFG)
+	love.graphics.setLineWidth(2)
+	love.graphics.line(0,380,500,380)		
 
 	-- Explanation
 	love.graphics.setFont(tinyFont)
 	love.graphics.setColor(colorFG)
-	love.graphics.printf('left/right - change value',0,355,500,'center')
-	love.graphics.printf('return - start game',0,365,500,'center')
+	love.graphics.printf('left/right - change value',0,353,500,'center')
+	love.graphics.printf('return - start game',0,363,500,'center')
 	
 	-- Descriptions
 	local maxLevels = math.min(customMode.nColor*customMode.nShape*customMode.nFill,16)

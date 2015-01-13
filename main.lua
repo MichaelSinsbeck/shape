@@ -18,17 +18,13 @@ function newGame()
 end
 
 function love.load()
-
-
-
-	
 	-- initialize
 	soundOn = true
 	initShapes()
 	loadSounds()
 	
 	-- define some colors
-	colorBG = {25,25,35}
+	colorBG = {15,15,25}
 	colorBox = {45,45,55}
 	colorFG = {180,180,180}
 	colorEmph = {250,250,250}
