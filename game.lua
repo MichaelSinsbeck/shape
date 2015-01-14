@@ -5,6 +5,7 @@ local levelOver = false
 local endTimer = 0
 local comboPoint
 local maxPt = 0
+local flyingScores = {}
 
 function game.goto()
 	state = 'game'
@@ -27,11 +28,19 @@ function timerToScore(timer)
 	return thisScore
 end
 
+function addFlyingScore(score)
+	if score > 0 then
+		local newScore = {score='+ ' .. score,timer = 0}
+		table.insert(flyingScores,newScore)
+	end
+end
+
 function registerKey(key)
 	started = true
-	if thisLevel[1].direction == key then
+	if thisLevel[1].direction == key then -- correct key
 		local scoreToAdd = timerToScore(timer)
 		score = score + scoreToAdd
+		addFlyingScore(scoreToAdd)
 		comboPoint = scoreToAdd + 10
 		maxPt = math.max(maxPt,comboPoint)
 		print('Max: ' .. maxPt)
@@ -42,7 +51,7 @@ function registerKey(key)
 		local xTarget
 		if key == 1 then xTarget = -50 else xTarget = 550 end
 		table.insert(swipes,{shape = thisShape,x=250,xTarget=xTarget})
-	else
+	else -- wrong key
 		playSound('error')
 		comboPoint = 0
 		table.remove(thisLevel,1)	
@@ -77,7 +86,7 @@ function game.update(dt)
 
 	offset = math.max(offset - 10*dt,0)
 	local speed = 2500
-	for k,v in ipairs(swipes) do
+	for k,v in ipairs(swipes) do -- move swipes
 		local dx = v.x-v.xTarget
 		if math.abs(dx) < speed*dt then
 			v.dead = true
@@ -87,9 +96,18 @@ function game.update(dt)
 			v.x = v.x + speed*dt
 		end
 	end
-	for i=#swipes,1,-1 do
+	for i=#swipes,1,-1 do -- remove dead swipes
 		if swipes[i].dead then
 			table.remove(swipes,i)
+		end
+	end
+	for k,v in ipairs(flyingScores) do
+		v.timer = v.timer + dt
+	end
+	-- remove dead flying scores
+	for i=#flyingScores,1,-1 do
+		if flyingScores[i].timer > 0.3 then
+			table.remove(flyingScores,i)
 		end
 	end
 	if started then
@@ -133,10 +151,10 @@ function game.draw()
 	else
 		-- box around score
 		love.graphics.setColor(colorBox)
-		love.graphics.rectangle('fill',0,0,260,140)
+		love.graphics.rectangle('fill',0,0,260,180)
 		love.graphics.setColor(colorFG)
 		love.graphics.setLineWidth(2)
-		love.graphics.rectangle('line',-5,-5,265,145)				
+		love.graphics.rectangle('line',-5,-5,265,185)				
 		-- total score
 		love.graphics.setColor(colorFG)
 		love.graphics.setFont(largeFont)
@@ -146,16 +164,22 @@ function game.draw()
 		local height = timerToScore(timer)
 		height = math.min(height,600)
 		love.graphics.setLineWidth(2)
-		love.graphics.rectangle('line',30,80,200,30)
-		love.graphics.rectangle('fill',230-height/3,80,height/3,30)
---		love.graphics.rectangle('fill',460,360-0.3*height,30,0.3*height)		
+		love.graphics.rectangle('line',30,110,200,30)
+		love.graphics.rectangle('fill',230-height/3,110,height/3,30)
 		love.graphics.setFont(smallFont)
 		love.graphics.setColor(colorEmph)
-		love.graphics.printf(height,33,84,194,'right')
+		love.graphics.printf(height,33,114,194,'right')
+		-- flying scores
+		for k,v in ipairs(flyingScores) do
+			local y = 74+40*math.exp(-v.timer*10)
+			love.graphics.setColor(colorEmph)
+			love.graphics.printf(v.score,33,y,194,'right')
+		end		
 		-- press tab
 		love.graphics.setFont(tinyFont)
 		love.graphics.setColor(colorFG)
-		love.graphics.printf('Hold "tab" to see ordering',30,116,200,'left')
+		love.graphics.printf('Hold "tab" to see ordering',30,146,200,'left')
+		
 		-- press escape again to quit
 		if aboutToQuit then
 			love.graphics.setFont(tinyFont)
