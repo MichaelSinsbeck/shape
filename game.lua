@@ -43,8 +43,7 @@ function registerKey(key)
 		addFlyingScore(scoreToAdd)
 		comboPoint = scoreToAdd + 10
 		maxPt = math.max(maxPt,comboPoint)
-		print('Max: ' .. maxPt)
-		local pitch = 2^((comboPoint-10)/160)*0.75
+		local pitch = 2^((comboPoint-10)/300)*0.75
 		playSound('check',pitch)
 		
 		local thisShape = table.remove(thisLevel,1)
@@ -161,14 +160,13 @@ function game.draw()
 		love.graphics.printf(score,0,20,230,'right')
 		
 		-- new score
-		local height = timerToScore(timer)
-		height = math.min(height,600)
+		local height = math.min(timerToScore(timer),600)
 		love.graphics.setLineWidth(2)
 		love.graphics.rectangle('line',30,110,200,30)
 		love.graphics.rectangle('fill',230-height/3,110,height/3,30)
 		love.graphics.setFont(smallFont)
 		love.graphics.setColor(colorEmph)
-		love.graphics.printf(height,33,114,194,'right')
+		love.graphics.printf(timerToScore(timer),33,114,194,'right')
 		-- flying scores
 		for k,v in ipairs(flyingScores) do
 			local y = 74+40*math.exp(-v.timer*10)
