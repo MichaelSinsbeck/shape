@@ -1,3 +1,6 @@
-This is a game about shapes and memory.
+This is a game about shapes, color and memory.
 
-The sound files are not mine. For licence information about the sound files, please see licence.txt. All sound no mentioned there, are from soundjay.com
+It is written in LÖVE (www.love2d.org). To run it, download the files into any folder and open the folder with LÖVE:
+```
+love gamefolder
+```
