@@ -202,8 +202,7 @@ function drawShape(x,y,colorIdx,shapeIdx,fillIdx,scale,fade)
 	local g = color[colorIdx][2]*fade + (1-fade) * 25
 	local b = color[colorIdx][3]*fade + (1-fade) * 35
 
-
-	love.graphics.origin()
+	love.graphics.push()
 	love.graphics.translate(x,y)
 	love.graphics.scale(thisScale,thisScale)	
 	love.graphics.setColor(r,g,b,alpha)
@@ -215,5 +214,5 @@ function drawShape(x,y,colorIdx,shapeIdx,fillIdx,scale,fade)
 		end
 	end
 	love.graphics.polygon('line',outline[shapeIdx])
-	love.graphics.origin()
+	love.graphics.pop()
 end
