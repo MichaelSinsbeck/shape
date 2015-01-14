@@ -2,6 +2,7 @@ local modeselect = {}
 local selection = 1
 local modi
 local cursor
+local lock = 1
 customMode = {
 		name = 'custom',
 		nColor = 1,
@@ -12,7 +13,16 @@ customMode = {
 
 function modeselect.init()
 	modi = {}
-	local modus = {
+	local modus
+	modus = {
+		name = 'easy',
+		nColor = 8,
+		nShape = 8,
+		nFill = 2,
+		nLevels = 6
+		}
+	table.insert(modi,modus)	
+	modus = {
 		name = 'color',
 		nColor = 8,
 		nShape = 1,
@@ -30,21 +40,13 @@ function modeselect.init()
 		}
 	table.insert(modi,modus)
 	modus = {
-		name = 'mixed',
+		name = 'brainfuck',
 		nColor = 2,
 		nShape = 2,
 		nFill = 2,
 		nLevels = 8
 		}
 	table.insert(modi,modus)	
-	modus = {
-		name = 'full',
-		nColor = 8,
-		nShape = 8,
-		nFill = 2,
-		nLevels = 8
-		}
-	table.insert(modi,modus)
 	table.insert(modi,customMode)	
 				
 end
@@ -59,14 +61,36 @@ function modeselect.goto()
 end
 
 function modeselect.draw()
+	-- Title line
 	love.graphics.setFont(largeFont)
 	love.graphics.setColor(colorEmph)
 	love.graphics.printf('Select mode',0,20,500,'center')
-	love.graphics.setColor(colorFG)
+	-- Mode names
+--	love.graphics.setColor(colorFG)
 	for k,v in ipairs(modi) do
-		love.graphics.printf(v.name,200,k*50+50,350,'left')
+		if k <= lock then
+			love.graphics.setColor(colorFG)
+			love.graphics.printf(v.name,200,k*50+50,350,'left')
+		else
+			love.graphics.setColor(colorBox)
+			love.graphics.printf(v.name,200,k*50+50,350,'left')
+			love.graphics.setColor(colorFG)			
+			love.graphics.rectangle('fill',174,k*50+80,16,14)
+			love.graphics.setLineWidth(2)
+			love.graphics.circle('line',182,k*50+80,6,20)			
+		end
 	end
 	drawShape(140,selection*50+23+60, cursor.color,cursor.shape,cursor.fill,0.4)
+	
+	-- Locks
+--[[	love.graphics.setColor(colorFG)
+	for i=lock+1,#modi do
+		local width = 8
+		love.graphics.rectangle('fill',174,i*50+80,16,14)
+		love.graphics.setLineWidth(2)
+		love.graphics.circle('line',182,i*50+80,6,20)
+--182,selection*30+360+12, cursor.color,cursor.shape,cursor.fill,0.2)		
+	end--]]
 	
 	-- Box
 	love.graphics.setColor(colorBox)
