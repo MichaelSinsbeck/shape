@@ -10,12 +10,13 @@ local function randomPermutation(n)
 	return perm
 end
 
-function newOrder(nColor,nShape,nFill,nLevels)
+function newOrder(nColor,nShape,nFill,nLevels,name)
 	nStages = nColor*nShape*nFill
 	if nLevels > nStages then
 		nLevels = nStages
 	end
 	stages = {}
+	stages.name = name
 	-- randomly select some shapes, colors, fillstyles
 	colorPerm = randomPermutation(#color)
 	shapePerm = randomPermutation(#outline)

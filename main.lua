@@ -5,8 +5,10 @@ states.highscore = require('highscore')
 states.menu = require('menu')
 states.modeselect = require('modeselect')
 states.custom = require('custom')
+states.unlock = require('unlock')
 require('shape')
 require('sound')
+
 
 function newGame()
 	started = false

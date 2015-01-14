@@ -1,14 +1,16 @@
 local modeselect = {}
 local selection = 1
-local modi
+--modi
 local cursor
-local lock = 1
+lock = 1
+
 customMode = {
 		name = 'custom',
 		nColor = 1,
 		nShape = 1,
 		nFill = 1,
-		nLevels = 1
+		nLevels = 1,
+		threshold = 70000
 		}
 
 function modeselect.init()
@@ -19,7 +21,8 @@ function modeselect.init()
 		nColor = 8,
 		nShape = 8,
 		nFill = 2,
-		nLevels = 6
+		nLevels = 6,
+		threshold = 0
 		}
 	table.insert(modi,modus)	
 	modus = {
@@ -27,7 +30,8 @@ function modeselect.init()
 		nColor = 8,
 		nShape = 1,
 		nFill = 1,
-		nLevels = 8
+		nLevels = 8,
+		threshold = 10000
 		}
 	table.insert(modi,modus)
 	
@@ -36,7 +40,8 @@ function modeselect.init()
 		nColor = 1,
 		nShape = 8,
 		nFill = 1,
-		nLevels = 8
+		nLevels = 8,
+		threshold = 30000
 		}
 	table.insert(modi,modus)
 	modus = {
@@ -44,7 +49,8 @@ function modeselect.init()
 		nColor = 2,
 		nShape = 2,
 		nFill = 2,
-		nLevels = 8
+		nLevels = 8,
+		threshold = 50000
 		}
 	table.insert(modi,modus)	
 	table.insert(modi,customMode)	
@@ -95,9 +101,7 @@ function modeselect.draw()
 	-- Box
 	love.graphics.setColor(colorBox)
 	love.graphics.rectangle('fill',0,380,500,140)
-	love.graphics.setColor(colorFG)
-	love.graphics.setLineWidth(2)
-	love.graphics.line(0,380,500,380)		
+	
 	
 	-- Descriptions
 	love.graphics.setColor(colorFG)
@@ -128,6 +132,21 @@ function modeselect.draw()
 	for i=1,modi[selection].nFill do
 		love.graphics.rectangle('fill',200+(i-1)*27,480,23,23)
 	end
+	
+	if selection > lock then -- if not unlocked yet, display condition
+		love.graphics.setColor(colorBox[1],colorBox[2],colorBox[3],210)
+		love.graphics.rectangle('fill',0,380,500,140)
+		local thresh = modi[selection].threshold
+		local prev = modi[selection-1].name
+		love.graphics.setColor(colorEmph)
+		love.graphics.setFont(smallFont)
+		love.graphics.printf('Win ' .. thresh .. ' point in mode "' .. prev .. '" to unlock',0,435,500,'center')
+	end
+	
+	-- box border
+	love.graphics.setColor(colorFG)
+	love.graphics.setLineWidth(2)
+	love.graphics.line(0,380,500,380)	
 
 end
 
@@ -144,14 +163,14 @@ function modeselect.keypressed(key)
 		playSound('move')
 	elseif key == 'escape' then
 		states.menu.goto()
-	elseif key == 'return' or key == ' ' then
+	elseif (key == 'return' or key == ' ') and selection <= lock then
 		playSound('select')
 		local thisMode = modi[selection]
 		if thisMode.name == 'custom' then
 			states.custom.goto()
 			return
 		else
-			stages = newOrder(thisMode.nColor, thisMode.nShape, thisMode.nFill, thisMode.nLevels)
+			stages = newOrder(thisMode.nColor, thisMode.nShape, thisMode.nFill, thisMode.nLevels, thisMode.name)
 			newGame()
 		end
 	end
