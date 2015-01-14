@@ -6,6 +6,7 @@ function unlock.goto()
 	if stages.name == modi[lock].name and modi[lock+1] and score >= modi[lock+1].threshold then
 		lock = lock + 1
 		message = modi[lock].name
+		saveState()		
 	end
 
 	if message then

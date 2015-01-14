@@ -21,7 +21,7 @@ end
 
 function love.load()
 	-- initialize
-	soundOn = true
+	--soundOn = true
 	initShapes()
 	loadSounds()
 	
@@ -38,9 +38,41 @@ function love.load()
 	largeFont = love.graphics.newFont('CaviarDreams.ttf',50)	
 	smallFont = love.graphics.newFont('Caviar_Dreams_Bold.ttf',20)
 	tinyFont = love.graphics.newFont('Caviar_Dreams_Bold.ttf',11)
+	
+	-- load state
+	loadFromFile()
 
 	-- start game in menu
 	states.menu.goto()
+end
+
+function loadFromFile()
+	local filename = 'config.txt'
+	if love.filesystem.exists(filename) then
+		local content = {}
+		for line in love.filesystem.lines(filename) do
+			table.insert(content,line)
+		end
+		lock = tonumber(content[1])
+		soundOn = (tonumber(content[2]) == 1)
+		print(lock)
+		print(soundOn)
+	else
+		lock = 1
+		soundOn = true
+		-- create file:
+		saveState()
+	end
+end
+
+function saveState()
+	local soundFlag
+	if soundOn then
+		soundFlag = 1
+	else
+		soundFlag = 0
+	end
+	love.filesystem.write('config.txt', lock .. '\n'..soundFlag .. '\n')
 end
 
 
@@ -57,9 +89,6 @@ function love.update(dt)
 end
 
 function love.keypressed(key)
-	--if key == 'escape' then
-	--	love.event.quit()
-	--end
 	if states[state] then
 		states[state].keypressed(key)
 	end	

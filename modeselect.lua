@@ -1,8 +1,6 @@
 local modeselect = {}
 local selection = 1
---modi
 local cursor
-lock = 1
 
 customMode = {
 		name = 'custom',

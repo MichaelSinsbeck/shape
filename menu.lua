@@ -12,13 +12,20 @@ function menu.init()
 	-- sound
 	local soundFun = function()
 		soundOn = not soundOn
+		saveState()		
 		if soundOn then
 			options[2].caption = 'sound: on'
 		else
 			options[2].caption = 'sound: off'
 		end
 	end
-	table.insert(options,{caption = 'sound: on', fun = soundFun})
+	local thisCaption
+	if soundOn then
+		thisCaption = 'sound: on'
+	else
+		thisCaption = 'sound: off'
+	end
+	table.insert(options,{caption = thisCaption, fun = soundFun})
 	
 	-- exit
 	local endFun = function() love.event.quit() end
