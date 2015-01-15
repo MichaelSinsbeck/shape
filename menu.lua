@@ -27,6 +27,24 @@ function menu.init()
 	end
 	table.insert(options,{caption = thisCaption, fun = soundFun})
 	
+	-- display
+	local dispFun = function()
+		displayFlat = not displayFlat
+		saveState()		
+		if displayFlat then
+			options[3].caption = 'display: flat'
+		else
+			options[3].caption = 'display: "3d"'
+		end
+	end
+	local thisCaption
+	if displayFlat then
+		thisCaption = 'display: flat'
+	else
+		thisCaption = 'display: "3d"'
+	end
+	table.insert(options,{caption = thisCaption, fun = dispFun})
+		
 	-- exit
 	local endFun = function() love.event.quit() end
 	table.insert(options,{caption = 'quit', fun = endFun})

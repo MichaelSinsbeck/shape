@@ -30,8 +30,9 @@ function love.load()
 	colorBox = {45,45,55}
 	colorFG = {180,180,180}
 	colorEmph = {250,250,250}
-	
 	love.graphics.setBackgroundColor(colorBG)
+	
+	displayFlat = true
 	
 	-- load fonts and logo
 	logo = love.graphics.newImage('logo_small.png')
@@ -55,8 +56,9 @@ function loadFromFile()
 		end
 		lock = tonumber(content[1])
 		soundOn = (tonumber(content[2]) == 1)
-		print(lock)
-		print(soundOn)
+		displayFlat = (tonumber(content[3]) == 1)
+		--print(lock)
+		--print(soundOn)
 	else
 		lock = 1
 		soundOn = true
@@ -67,12 +69,18 @@ end
 
 function saveState()
 	local soundFlag
+	local dispFlag
 	if soundOn then
 		soundFlag = 1
 	else
 		soundFlag = 0
 	end
-	love.filesystem.write('config.txt', lock .. '\n'..soundFlag .. '\n')
+	if displayFlat then
+		dispFlag = 1
+	else
+		dispFlag = 0
+	end
+	love.filesystem.write('config.txt', lock .. '\n'..soundFlag .. '\n' .. dispFlag .. '\n')
 end
 
 

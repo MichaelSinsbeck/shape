@@ -191,15 +191,36 @@ function game.draw()
 		love.graphics.setLineWidth(2)
 		love.graphics.line(0,380,500,380)			
 		-- all the shapes
-		for i = #thisLevel,1,-1 do
+		if displayFlat then
+			local dist = 90
+			local wx = 290
+			local wy = 380-dist*0.6
+			local sInit = 0.8
+			for i = math.min(#thisLevel,5),2,-1 do
 				v = thisLevel[i]
-				local factor = 2
-				local z = (i+offset-1)/factor + 1
-				local y = 20 + 430/z
-				local x = 400 - math.exp(-(z-1)) * 150
-				local fade = 1
-				if i>1 then fade = math.exp(0.15*(1-i)) end
-				drawShape(x,y,v.color,v.shape,v.fill,1/z,fade)
+				local cx = wx+dist*(i+offset-2)*0.5
+				local cy = wy-dist*(i+offset-2)
+				drawShape(cx,cy,v.color,v.shape,v.fill,sInit)
+
+			end
+			if thisLevel[1] then
+				v = thisLevel[1]
+				local cx = offset*wx + (1-offset) * 250
+				local cy = offset*wy + (1-offset) * 450
+				local scale = offset*sInit + (1-offset) * 1
+				drawShape(cx,cy,v.color,v.shape,v.fill,scale)
+			end			
+		else
+			for i = math.min(#thisLevel,40),1,-1 do
+					v = thisLevel[i]
+					local factor = 2
+					local z = (i+offset-1)/factor + 1
+					local y = 20 + 430/z
+					local x = 400 - math.exp(-(z-1)) * 150
+					local fade = 1
+					if i>1 then fade = math.exp(0.15*(1-i)) end
+					drawShape(x,y,v.color,v.shape,v.fill,1/z,fade)
+			end
 		end
 		
 		-- swiping shape

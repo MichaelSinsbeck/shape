@@ -8,7 +8,7 @@ customMode = {
 		nShape = 1,
 		nFill = 1,
 		nLevels = 1,
-		threshold = 70000
+		threshold = 50000
 		}
 
 function modeselect.init()
@@ -48,7 +48,7 @@ function modeselect.init()
 		nShape = 2,
 		nFill = 2,
 		nLevels = 8,
-		threshold = 50000
+		threshold = 40000
 		}
 	table.insert(modi,modus)	
 	table.insert(modi,customMode)	
