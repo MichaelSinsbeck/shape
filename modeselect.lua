@@ -8,7 +8,8 @@ customMode = {
 		nShape = 1,
 		nFill = 1,
 		nLevels = 1,
-		threshold = 50000
+		threshold = 50000,
+		isRandom = true
 		}
 
 function modeselect.init()
@@ -20,7 +21,8 @@ function modeselect.init()
 		nShape = 8,
 		nFill = 2,
 		nLevels = 6,
-		threshold = 0
+		threshold = 0,
+		isRandom = false
 		}
 	table.insert(modi,modus)	
 	modus = {
@@ -29,7 +31,8 @@ function modeselect.init()
 		nShape = 1,
 		nFill = 1,
 		nLevels = 8,
-		threshold = 10000
+		threshold = 10000,
+		isRandom = false
 		}
 	table.insert(modi,modus)
 	
@@ -39,7 +42,8 @@ function modeselect.init()
 		nShape = 8,
 		nFill = 1,
 		nLevels = 8,
-		threshold = 30000
+		threshold = 30000,
+		isRandom = false
 		}
 	table.insert(modi,modus)
 	modus = {
@@ -48,7 +52,8 @@ function modeselect.init()
 		nShape = 2,
 		nFill = 2,
 		nLevels = 8,
-		threshold = 40000
+		threshold = 40000,
+		isRandom = true
 		}
 	table.insert(modi,modus)	
 	table.insert(modi,customMode)	
@@ -104,31 +109,37 @@ function modeselect.draw()
 	-- Descriptions
 	love.graphics.setColor(colorFG)
 	love.graphics.setFont(smallFont)
-	love.graphics.printf('Levels',0,390,165,'right')
-	love.graphics.printf(modi[selection].nLevels,200,390,200,'left')	
-	love.graphics.printf('Colors',0,420,165,'right')
-	love.graphics.printf('Shapes',0,450,165,'right')
-	love.graphics.printf('Styles',0,480,165,'right')
+	love.graphics.printf('Levels',0,385,165,'right')
+	love.graphics.printf(modi[selection].nLevels,200,385,200,'left')
+	love.graphics.printf('Colors',0,410,165,'right')
+	love.graphics.printf('Shapes',0,435,165,'right')
+	love.graphics.printf('Styles',0,460,165,'right')
+	love.graphics.printf('Order',0,485,165,'right')
+	if modi[selection].isRandom then
+		love.graphics.printf('random',200,485,200,'left')
+	else
+		love.graphics.printf('stratified',200,485,200,'left')
+	end
 	
 	love.graphics.setLineWidth(2)
 	for i=1,#color do
-		love.graphics.rectangle('line',200+(i-1)*27,420,23,23)
+		love.graphics.rectangle('line',200+(i-1)*19,416,15,15)
 	end
 	for i=1,#outline do
-		love.graphics.rectangle('line',200+(i-1)*27,450,23,23)
+		love.graphics.rectangle('line',200+(i-1)*19,441,15,15)
 	end
 	for i=1,2 do
-		love.graphics.rectangle('line',200+(i-1)*27,480,23,23)
+		love.graphics.rectangle('line',200+(i-1)*19,466,15,15)
 	end
 	
 	for i=1,modi[selection].nColor do
-		love.graphics.rectangle('fill',200+(i-1)*27,420,23,23)
+		love.graphics.rectangle('fill',200+(i-1)*19,416,15,15)
 	end
 	for i=1,modi[selection].nShape do
-		love.graphics.rectangle('fill',200+(i-1)*27,450,23,23)
+		love.graphics.rectangle('fill',200+(i-1)*19,441,15,15)
 	end
 	for i=1,modi[selection].nFill do
-		love.graphics.rectangle('fill',200+(i-1)*27,480,23,23)
+		love.graphics.rectangle('fill',200+(i-1)*19,466,15,15)
 	end
 	
 	if selection > lock then -- if not unlocked yet, display condition
@@ -169,7 +180,7 @@ function modeselect.keypressed(key)
 			states.custom.goto()
 			return
 		else
-			stages = newOrder(thisMode.nColor, thisMode.nShape, thisMode.nFill, thisMode.nLevels, thisMode.name)
+			stages = newOrder(thisMode.nColor, thisMode.nShape, thisMode.nFill, thisMode.nLevels, thisMode.name, thisMode.isRandom)
 			newGame()
 		end
 	end

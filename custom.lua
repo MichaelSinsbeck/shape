@@ -27,46 +27,50 @@ function custom.draw()
 	-- Descriptions
 	local maxLevels = math.min(customMode.nColor*customMode.nShape*customMode.nFill,16)
 	love.graphics.setFont(smallFont)
-	love.graphics.printf('Levels',0,390,165,'right')
-	love.graphics.printf(customMode.nLevels.. ' (max ' .. maxLevels .. ')',200,390,200,'left')	
-	love.graphics.printf('Colors',0,420,165,'right')
-	love.graphics.printf('Shapes',0,450,165,'right')
-	love.graphics.printf('Styles',0,480,165,'right')
+
+	love.graphics.printf('Levels',0,385,165,'right')
+	love.graphics.printf(customMode.nLevels,200,385,200,'left')
+	love.graphics.printf('Colors',0,410,165,'right')
+	love.graphics.printf('Shapes',0,435,165,'right')
+	love.graphics.printf('Styles',0,460,165,'right')
+	love.graphics.printf('Order',0,485,165,'right')
+	if customMode.isRandom then
+		love.graphics.printf('random',200,485,200,'left')
+	else
+		love.graphics.printf('stratified',200,485,200,'left')
+	end
+
 	
-	drawShape(182,selection*30+360+12, cursor.color,cursor.shape,cursor.fill,0.2)
+	drawShape(182,selection*25+372, cursor.color,cursor.shape,cursor.fill,0.2)
 	
 	love.graphics.setLineWidth(2)
 	love.graphics.setColor(colorFG)	
 	for i=1,#color do
-		love.graphics.rectangle('line',200+(i-1)*27,420,23,23)
+		love.graphics.rectangle('line',200+(i-1)*19,416,15,15)
 	end
 	for i=1,#outline do
-		love.graphics.rectangle('line',200+(i-1)*27,450,23,23)
+		love.graphics.rectangle('line',200+(i-1)*19,441,15,15)
 	end
 	for i=1,2 do
-		love.graphics.rectangle('line',200+(i-1)*27,480,23,23)
+		love.graphics.rectangle('line',200+(i-1)*19,466,15,15)
 	end
 	
 	for i=1,customMode.nColor do
-		love.graphics.rectangle('fill',200+(i-1)*27,420,23,23)
+		love.graphics.rectangle('fill',200+(i-1)*19,416,15,15)
 	end
 	for i=1,customMode.nShape do
-		love.graphics.rectangle('fill',200+(i-1)*27,450,23,23)
+		love.graphics.rectangle('fill',200+(i-1)*19,441,15,15)
 	end
 	for i=1,customMode.nFill do
-		love.graphics.rectangle('fill',200+(i-1)*27,480,23,23)
+		love.graphics.rectangle('fill',200+(i-1)*19,466,15,15)
 	end
-	
-
-	
-
 end
 
 function custom.update(dt)
 end
 
 function custom.keypressed(key)
-	local nOptions = 4
+	local nOptions = 5
 	if key == 'down' then
 		selection = (selection%nOptions)+1
 		playSound('move')
@@ -85,6 +89,8 @@ function custom.keypressed(key)
 			customMode.nShape = math.max(customMode.nShape-1,1)
 		elseif selection == 4 then
 			customMode.nFill = math.max(customMode.nFill-1,1)
+		elseif selection == 5 then
+			customMode.isRandom = not customMode.isRandom
 		end
 		local maxLevels = math.min(customMode.nColor*customMode.nShape*customMode.nFill,16)
 		customMode.nLevels = math.min(customMode.nLevels,maxLevels)
@@ -97,6 +103,8 @@ function custom.keypressed(key)
 			customMode.nShape = math.min(customMode.nShape+1,8)
 		elseif selection == 4 then
 			customMode.nFill = math.min(customMode.nFill+1,2)
+		elseif selection == 5 then
+			customMode.isRandom = not customMode.isRandom			
 		end
 		local maxLevels = math.min(customMode.nColor*customMode.nShape*customMode.nFill,16)
 		customMode.nLevels = math.min(customMode.nLevels,maxLevels)

@@ -10,7 +10,15 @@ local function randomPermutation(n)
 	return perm
 end
 
-function newOrder(nColor,nShape,nFill,nLevels,name)
+function newOrder(nColor,nShape,nFill,nLevels,name,isFullRandom)
+	if isFullRandom then
+		return newOrderRandom(nColor,nShape,nFill,nLevels,name)	
+	else
+		return newOrderStratified(nColor,nShape,nFill,nLevels,name)
+	end
+end
+
+function newOrderStratified(nColor,nShape,nFill,nLevels,name)
 	local nStages = nColor*nShape*nFill
 	if nLevels > nStages then
 		nLevels = nStages
@@ -100,7 +108,7 @@ function newOrder(nColor,nShape,nFill,nLevels,name)
 	return stages
 end
 
-function newOrder2(nColor,nShape,nFill,nLevels,name)
+function newOrderRandom(nColor,nShape,nFill,nLevels,name)
 	local nStages = nColor*nShape*nFill
 	if nLevels > nStages then
 		nLevels = nStages
