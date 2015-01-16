@@ -56,15 +56,14 @@ function loadFromFile()
 		end
 		lock = tonumber(content[1])
 		soundOn = (tonumber(content[2]) == 1)
-		displayFlat = (tonumber(content[3]) == 1)
 		customMode = {
 				name = 'custom',
-				nColor = tonumber(content[5]),
-				nShape = tonumber(content[6]),
-				nFill = tonumber(content[7]),
-				nLevels = tonumber(content[4]),
+				nColor = tonumber(content[4]),
+				nShape = tonumber(content[5]),
+				nFill = tonumber(content[6]),
+				nLevels = tonumber(content[3]),
 				threshold = 50000,
-				isRandom = (tonumber(content[8]) == 1)
+				isRandom = (tonumber(content[7]) == 1)
 				}		
 
 		--print(lock)
@@ -72,7 +71,6 @@ function loadFromFile()
 	else
 		lock = 1
 		soundOn = true
-		displayFlat = true	
 
 		customMode = {
 				name = 'custom',
@@ -90,17 +88,11 @@ end
 
 function saveState()
 	local soundFlag
-	local dispFlag
 	local randomFlag
 	if soundOn then
 		soundFlag = 1
 	else
 		soundFlag = 0
-	end
-	if displayFlat then
-		dispFlag = 1
-	else
-		dispFlag = 0
 	end
 
 	if customMode.isRandom then
@@ -109,7 +101,7 @@ function saveState()
 		randomFlag = 0
 	end
 	love.filesystem.append('config.txt', randomFlag)
-	local output = lock ..'\n' .. soundFlag ..'\n' .. dispFlag ..'\n' .. customMode.nLevels ..'\n' .. customMode.nColor ..'\n' .. customMode.nShape ..'\n' .. customMode.nFill ..'\n' .. randomFlag	..'\n'
+	local output = lock ..'\n' .. soundFlag ..'\n' .. customMode.nLevels ..'\n' .. customMode.nColor ..'\n' .. customMode.nShape ..'\n' .. customMode.nFill ..'\n' .. randomFlag	..'\n'
 	
 	love.filesystem.write('config.txt', output)	
 end
