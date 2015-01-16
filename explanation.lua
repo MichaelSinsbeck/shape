@@ -80,6 +80,7 @@ function explanation.keypressed(key)
 			aboutToQuit = true
 		else
 			states.modeselect.goto()
+			playSound('back')
 		end
 	else
 		aboutToQuit = false

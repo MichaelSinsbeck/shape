@@ -14,6 +14,7 @@ function loadSounds()
 	addSound('tada','Ta Da-SoundBible.com-1884170640.wav')
 	addSound('goat','Bleat-SoundBible.com-893851569.wav')
 	addSound('move','Tick-DeepFrozenApps-397275646.mp3')
+	addSound('back','Woosh-Mark_DiAngelo-4778593.wav')
 end
 
 function playSound(name,pitch)

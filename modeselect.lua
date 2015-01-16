@@ -161,6 +161,7 @@ function modeselect.keypressed(key)
 		playSound('move')
 	elseif key == 'escape' then
 		states.menu.goto()
+		playSound('back')
 	elseif (key == 'return' or key == ' ') and selection <= lock then
 		playSound('select')
 		local thisMode = modi[selection]

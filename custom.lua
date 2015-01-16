@@ -75,6 +75,7 @@ function custom.keypressed(key)
 		playSound('move')
 	elseif key == 'escape' then
 		states.modeselect.goto()
+		playSound('back')
 	elseif key == 'left' then
 		if selection == 1 then
 			customMode.nLevels = math.max(customMode.nLevels-1,1)
