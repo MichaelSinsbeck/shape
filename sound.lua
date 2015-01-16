@@ -1,25 +1,19 @@
 local sounds = {}
 
 local function addSound(name,filename)
+	filename = 'sound/' .. filename
 	sounds[name] = sounds[name] or {}
 	local newSource = love.audio.newSource(filename,'static')
 	table.insert(sounds[name],newSource)
 end
 
 function loadSounds()
---	addSound('check','Woosh-Mark_DiAngelo-4778593.wav')
 	addSound('check','Blop-Mark_DiAngelo-79054334.wav')	
-	--addSound('check','whip-whoosh-03.wav')
-	addSound('move','Woosh-Mark_DiAngelo-4778593.wav')
 	addSound('select','button-20.wav')
 	addSound('error','beep-10.wav')
-
---[[	table.insert(sound_check,love.audio.newSource('Woosh-Mark_DiAngelo-4778593.wav','static')	)
-	--table.insert(sound_check,love.audio.newSource('Blop-Mark_DiAngelo-79054334.wav','static'))
-	--table.insert(sound_check,love.audio.newSource('whip-whoosh-03.wav','static'))
-	sound_move = love.audio.newSource('Blop-Mark_DiAngelo-79054334.wav','static')
-	sound_select = love.audio.newSource('button-21.wav','static')
-	sound_error = love.audio.newSource('beep-10.wav','static')]]	
+	addSound('tada','Ta Da-SoundBible.com-1884170640.wav')
+	addSound('goat','Bleat-SoundBible.com-893851569.wav')
+	addSound('move','Tick-DeepFrozenApps-397275646.mp3')
 end
 
 function playSound(name,pitch)

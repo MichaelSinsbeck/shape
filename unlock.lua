@@ -10,6 +10,7 @@ function unlock.goto()
 	end
 
 	if message then
+		playSound('tada')
 		state = 'unlock'
 	else
 		states.modeselect.goto()

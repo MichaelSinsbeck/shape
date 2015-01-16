@@ -41,17 +41,32 @@ function registerKey(key)
 		local scoreToAdd = timerToScore(timer)
 		score = score + scoreToAdd
 		addFlyingScore(scoreToAdd)
+		
+		local pitch = 2^(comboPoint/300) * 0.75
+		playSound('check',pitch)
+		
+		-- Was originally used for the marimba sound
+		--local logpitch = comboPoint/160
+		--local octave = math.min(math.floor(logpitch),4)
+		--local soundName = 'c' .. (octave+2)
+		--local pitch = 2^(logpitch-octave)
+		--print ('octave: ' .. octave )		
+		--playSound(soundName,pitch)
+		
 		comboPoint = scoreToAdd + 10
 		maxPt = math.max(maxPt,comboPoint)
-		local pitch = 2^((comboPoint-10)/300)*0.75
-		playSound('check',pitch)
+
 		
 		local thisShape = table.remove(thisLevel,1)
 		local xTarget
 		if key == 1 then xTarget = -50 else xTarget = 550 end
 		table.insert(swipes,{shape = thisShape,x=250,xTarget=xTarget})
 	else -- wrong key
-		playSound('error')
+		if comboPoint > 400 then
+			playSound('goat')
+		else
+			playSound('error')
+		end
 		comboPoint = 0
 		table.remove(thisLevel,1)	
 	end

@@ -36,9 +36,9 @@ function love.load()
 	
 	-- load fonts and logo
 	logo = love.graphics.newImage('logo_small.png')
-	largeFont = love.graphics.newFont('CaviarDreams.ttf',50)	
-	smallFont = love.graphics.newFont('Caviar_Dreams_Bold.ttf',20)
-	tinyFont = love.graphics.newFont('Caviar_Dreams_Bold.ttf',11)
+	largeFont = love.graphics.newFont('font/CaviarDreams.ttf',50)	
+	smallFont = love.graphics.newFont('font/Caviar_Dreams_Bold.ttf',20)
+	tinyFont = love.graphics.newFont('font/Caviar_Dreams_Bold.ttf',11)
 	
 	-- load state
 	loadFromFile()
