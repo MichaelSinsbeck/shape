@@ -2,16 +2,6 @@ local modeselect = {}
 local selection = 1
 local cursor
 
-customMode = {
-		name = 'custom',
-		nColor = 1,
-		nShape = 1,
-		nFill = 1,
-		nLevels = 1,
-		threshold = 50000,
-		isRandom = true
-		}
-
 function modeselect.init()
 	modi = {}
 	local modus
@@ -118,7 +108,7 @@ function modeselect.draw()
 	if modi[selection].isRandom then
 		love.graphics.printf('random',200,485,200,'left')
 	else
-		love.graphics.printf('stratified',200,485,200,'left')
+		love.graphics.printf('stratified (easy)',200,485,200,'left')
 	end
 	
 	love.graphics.setLineWidth(2)

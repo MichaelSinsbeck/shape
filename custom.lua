@@ -37,7 +37,7 @@ function custom.draw()
 	if customMode.isRandom then
 		love.graphics.printf('random',200,485,200,'left')
 	else
-		love.graphics.printf('stratified',200,485,200,'left')
+		love.graphics.printf('stratified (easy)',200,485,200,'left')
 	end
 
 	
@@ -80,6 +80,7 @@ function custom.keypressed(key)
 	elseif key == 'escape' then
 		states.modeselect.goto()
 		playSound('back')
+		saveState()		
 	elseif key == 'left' then
 		if selection == 1 then
 			customMode.nLevels = math.max(customMode.nLevels-1,1)
@@ -110,6 +111,7 @@ function custom.keypressed(key)
 		customMode.nLevels = math.min(customMode.nLevels,maxLevels)
 	elseif key == 'return' then
 		playSound('select')
+		saveState()		
 		stages = newOrder(customMode.nColor, customMode.nShape, customMode.nFill, customMode.nLevels)
 			newGame()
 	end

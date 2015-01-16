@@ -207,7 +207,7 @@ function game.draw()
 		love.graphics.setLineWidth(2)
 		love.graphics.line(0,380,500,380)			
 		-- all the shapes
-		if displayFlat then
+		--[[if displayFlat then
 			local dist = 90
 			local wx = 290
 			local wy = 380-dist*0.6
@@ -226,7 +226,7 @@ function game.draw()
 				local scale = offset*sInit + (1-offset) * 1
 				drawShape(cx,cy,v.color,v.shape,v.fill,scale)
 			end			
-		else
+		else--]]
 			for i = math.min(#thisLevel,40),1,-1 do
 					v = thisLevel[i]
 					local factor = 2
@@ -237,7 +237,7 @@ function game.draw()
 					if i>1 then fade = math.exp(0.15*(1-i)) end
 					drawShape(x,y,v.color,v.shape,v.fill,1/z,fade)
 			end
-		end
+		--end
 		
 		-- swiping shape
 		for k,v in ipairs(swipes) do
