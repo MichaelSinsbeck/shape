@@ -11,11 +11,101 @@ local function randomPermutation(n)
 end
 
 function newOrder(nColor,nShape,nFill,nLevels,name)
-	nStages = nColor*nShape*nFill
+	local nStages = nColor*nShape*nFill
 	if nLevels > nStages then
 		nLevels = nStages
 	end
+	stageRegister = {}
 	stages = {}
+	stages.name = name
+	-- randomly select some shapes, colors, fillstyles
+	colorPerm = randomPermutation(#color)
+	shapePerm = randomPermutation(#outline)
+	fillPerm = randomPermutation(2)
+	-- generate combinations and cross table
+	crossTable = {}
+	for i=0,nStages-1 do
+		local N = i
+		local thisFill= N%nFill
+		N = (N-thisFill)/nFill
+		local thisShape = N%nShape
+		N = (N-thisShape)/nShape
+		local thisColor = N%nColor
+		thisFill = thisFill + 1
+		thisShape = thisShape + 1
+		thisColor = thisColor + 1
+		local newStage = {shape = shapePerm[thisShape], color=colorPerm[thisColor],fill=fillPerm[thisFill]}
+		table.insert(stageRegister,newStage)
+		table.insert(crossTable, 0)
+	end
+	
+	for i=1,nLevels do
+		local minCross = math.huge
+		-- find minimum of crosstable
+		for k,v in ipairs(crossTable) do
+			minCross = math.min(v,minCross)
+		end
+			
+		-- put minimal elements into one table
+		local idxTable = {}
+		for k,v in ipairs(crossTable) do
+			if v == minCross then				
+				table.insert(idxTable,k)
+			end
+		end
+
+		-- pull random one	
+		local idx = love.math.random(#idxTable)
+		local newShape = stageRegister[idxTable[idx]]
+		table.insert(stages,newShape)
+
+		-- update cross table
+		for k,v in ipairs(stageRegister) do
+			if v.shape == newShape.shape then
+				crossTable[k] = crossTable[k] + 1
+			end
+			if v.color == newShape.color then
+				crossTable[k] = crossTable[k] + 1
+			end
+			if v.fill == newShape.fill then
+				crossTable[k] = crossTable[k] + 1
+			end
+			if v == newShape then
+				crossTable[k] = crossTable[k] + 100
+			end			
+		end
+	end
+	-- assign directions
+	local first = love.math.random(2)
+	stages[1].direction = first
+	count={0,0}
+	count[first] = 1
+	for i=2,nLevels do
+		local thisDirection
+		if count[2] >= nLevels/2 or count[1] == 0 then
+			thisDirection = 1
+		elseif count[1] >= nLevels/2 or count[2] == 0 then
+			thisDirection = 2
+		else
+--			if love.math.random() < count[1]/(count[1]+count[2]) then
+			if love.math.random() < 0.5 then
+				thisDirection = 2
+			else
+				thisDirection = 1
+			end
+		end
+		count[thisDirection] = count[thisDirection] + 1 
+		stages[i].direction = thisDirection
+	end	
+	return stages
+end
+
+function newOrder2(nColor,nShape,nFill,nLevels,name)
+	local nStages = nColor*nShape*nFill
+	if nLevels > nStages then
+		nLevels = nStages
+	end
+	local stages = {}
 	stages.name = name
 	-- randomly select some shapes, colors, fillstyles
 	colorPerm = randomPermutation(#color)
