@@ -98,11 +98,11 @@ function modeselect.draw()
 	-- Descriptions
 	love.graphics.setColor(colorFG)
 	love.graphics.setFont(smallFont)
-	myPrint('Levels',0,385,165,'right')
-	myPrint(modi[selection].nLevels,200,385,200,'left')
-	myPrint('Colors',0,410,165,'right')
-	myPrint('Shapes',0,435,165,'right')
-	myPrint('Styles',0,460,165,'right')
+	myPrint('Colors',0,385,165,'right')
+	myPrint('Shapes',0,410,165,'right')
+	myPrint('Styles',0,435,165,'right')
+	myPrint('Levels',0,460,165,'right')
+	myPrint(modi[selection].nLevels,200,460,200,'left')	
 	myPrint('Order',0,485,165,'right')
 	if modi[selection].isRandom then
 		myPrint('random',200,485,200,'left')
@@ -112,23 +112,23 @@ function modeselect.draw()
 	
 	love.graphics.setLineWidth(2)
 	for i=1,#color do
-		love.graphics.rectangle('line',200+(i-1)*19,416,15,15)
+		love.graphics.rectangle('line',200+(i-1)*19,391,15,15)
 	end
 	for i=1,#outline do
-		love.graphics.rectangle('line',200+(i-1)*19,441,15,15)
+		love.graphics.rectangle('line',200+(i-1)*19,416,15,15)
 	end
 	for i=1,2 do
-		love.graphics.rectangle('line',200+(i-1)*19,466,15,15)
+		love.graphics.rectangle('line',200+(i-1)*19,441,15,15)
 	end
 	
 	for i=1,modi[selection].nColor do
-		love.graphics.rectangle('fill',200+(i-1)*19,416,15,15)
+		love.graphics.rectangle('fill',200+(i-1)*19,391,15,15)
 	end
 	for i=1,modi[selection].nShape do
-		love.graphics.rectangle('fill',200+(i-1)*19,441,15,15)
+		love.graphics.rectangle('fill',200+(i-1)*19,416,15,15)
 	end
 	for i=1,modi[selection].nFill do
-		love.graphics.rectangle('fill',200+(i-1)*19,466,15,15)
+		love.graphics.rectangle('fill',200+(i-1)*19,441,15,15)
 	end
 	
 	if selection > lock then -- if not unlocked yet, display condition

@@ -28,11 +28,12 @@ function custom.draw()
 	local maxLevels = math.min(customMode.nColor*customMode.nShape*customMode.nFill,16)
 	love.graphics.setFont(smallFont)
 
-	myPrint('Levels',0,385,165,'right')
-	myPrint(customMode.nLevels,200,385,200,'left')
-	myPrint('Colors',0,410,165,'right')
-	myPrint('Shapes',0,435,165,'right')
-	myPrint('Styles',0,460,165,'right')
+
+	myPrint('Colors',0,385,165,'right')
+	myPrint('Shapes',0,410,165,'right')
+	myPrint('Styles',0,435,165,'right')
+	myPrint('Levels',0,460,165,'right')
+	myPrint(customMode.nLevels,200,460,200,'left')	
 	myPrint('Order',0,485,165,'right')
 	if customMode.isRandom then
 		myPrint('random',200,485,200,'left')
@@ -45,24 +46,25 @@ function custom.draw()
 	
 	love.graphics.setLineWidth(2)
 	love.graphics.setColor(colorFG)	
+	
 	for i=1,#color do
-		love.graphics.rectangle('line',200+(i-1)*19,416,15,15)
+		love.graphics.rectangle('line',200+(i-1)*19,391,15,15)
 	end
 	for i=1,#outline do
-		love.graphics.rectangle('line',200+(i-1)*19,441,15,15)
+		love.graphics.rectangle('line',200+(i-1)*19,416,15,15)
 	end
 	for i=1,2 do
-		love.graphics.rectangle('line',200+(i-1)*19,466,15,15)
+		love.graphics.rectangle('line',200+(i-1)*19,441,15,15)
 	end
 	
 	for i=1,customMode.nColor do
-		love.graphics.rectangle('fill',200+(i-1)*19,416,15,15)
+		love.graphics.rectangle('fill',200+(i-1)*19,391,15,15)
 	end
 	for i=1,customMode.nShape do
-		love.graphics.rectangle('fill',200+(i-1)*19,441,15,15)
+		love.graphics.rectangle('fill',200+(i-1)*19,416,15,15)
 	end
 	for i=1,customMode.nFill do
-		love.graphics.rectangle('fill',200+(i-1)*19,466,15,15)
+		love.graphics.rectangle('fill',200+(i-1)*19,441,15,15)
 	end
 end
 
@@ -83,13 +85,13 @@ function custom.keypressed(key)
 		saveState()		
 	elseif key == 'left' then
 		if selection == 1 then
-			customMode.nLevels = math.max(customMode.nLevels-1,1)
-		elseif selection == 2 then
 			customMode.nColor = math.max(customMode.nColor-1,1)
-		elseif selection == 3 then
+		elseif selection == 2 then
 			customMode.nShape = math.max(customMode.nShape-1,1)
-		elseif selection == 4 then
+		elseif selection == 3 then
 			customMode.nFill = math.max(customMode.nFill-1,1)
+		elseif selection == 4 then
+			customMode.nLevels = math.max(customMode.nLevels-1,1)			
 		elseif selection == 5 then
 			customMode.isRandom = not customMode.isRandom
 		end
@@ -97,13 +99,13 @@ function custom.keypressed(key)
 		customMode.nLevels = math.min(customMode.nLevels,maxLevels)
 	elseif key == 'right' then
 		if selection == 1 then
-			customMode.nLevels = customMode.nLevels + 1
-		elseif selection == 2 then
 			customMode.nColor = math.min(customMode.nColor+1,8)
-		elseif selection == 3 then
+		elseif selection == 2 then
 			customMode.nShape = math.min(customMode.nShape+1,8)
-		elseif selection == 4 then
+		elseif selection == 3 then
 			customMode.nFill = math.min(customMode.nFill+1,2)
+		elseif selection == 4 then
+			customMode.nLevels = customMode.nLevels + 1			
 		elseif selection == 5 then
 			customMode.isRandom = not customMode.isRandom			
 		end
