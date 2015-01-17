@@ -26,7 +26,26 @@ function menu.init()
 		thisCaption = 'sound: off'
 	end
 	table.insert(options,{caption = thisCaption, fun = soundFun})
-		
+
+	-- fullscreen
+	local fullscreenFun = function()
+		fullscreen = not fullscreen
+		saveState()	
+		if fullscreen then
+			options[3].caption = 'fullscreen: on'
+		else
+			options[3].caption = 'fullscreen: off'
+		end
+		makeWindow()
+	end
+	local thisCaption
+	if fullscreen then
+		thisCaption = 'fullscreen: on'
+	else
+		thisCaption = 'fullscreen: off'
+	end
+	table.insert(options,{caption = thisCaption, fun = fullscreenFun})
+			
 	-- exit
 	local endFun = function() love.event.quit() end
 	table.insert(options,{caption = 'quit', fun = endFun})
@@ -43,23 +62,25 @@ function menu.goto()
 end
 
 function menu.draw()
+	-- title line
 	love.graphics.setFont(largeFont)
 	love.graphics.setColor(colorEmph)
 	love.graphics.printf('Shape and Color',0,20,500,'center')
 	
+	-- options and cursor
 	love.graphics.setColor(colorFG)
 	for k,v in ipairs(options) do
-		love.graphics.printf(v.caption,200,k*50+50,350,'left')
+		love.graphics.printf(v.caption,180,k*50+50,350,'left')
 	end
-	drawShape(140,selection*50+23+60
+	drawShape(120,selection*50+23+60
 	,cursor.color,cursor.shape,cursor.fill,0.4)
 	
-	-- box
+	-- box at the bottom
 	love.graphics.setColor(colorBox)
-	love.graphics.rectangle('fill',0,380,500,140)	
+	love.graphics.rectangle('fill',xleft,380,xwidth,140)
 	love.graphics.setColor(colorFG)
 	love.graphics.setLineWidth(2)
-	love.graphics.line(0,380,500,380)	
+	love.graphics.line(xleft,380,xwidth,380)
 	
 	love.graphics.setColor(colorEmph)
 	love.graphics.draw(logo,410,450,0,1,1,50,50)

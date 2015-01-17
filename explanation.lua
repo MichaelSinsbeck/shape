@@ -48,10 +48,10 @@ function explanation.draw()
 	
 	-- Box
 	love.graphics.setColor(colorBox)
-	love.graphics.rectangle('fill',0,380,500,140)
+	love.graphics.rectangle('fill',xleft,380,xwidth,140)
 	love.graphics.setColor(colorFG)
 	love.graphics.setLineWidth(2)
-	love.graphics.line(0,380,500,380)		
+	love.graphics.line(xleft,380,xwidth,380)
 	
 
 	drawShape(250,450,v.color,v.shape,v.fill,1)

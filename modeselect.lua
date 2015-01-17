@@ -93,8 +93,7 @@ function modeselect.draw()
 	
 	-- Box
 	love.graphics.setColor(colorBox)
-	love.graphics.rectangle('fill',0,380,500,140)
-	
+	love.graphics.rectangle('fill',xleft,380,xwidth,140)
 	
 	-- Descriptions
 	love.graphics.setColor(colorFG)
@@ -134,7 +133,7 @@ function modeselect.draw()
 	
 	if selection > lock then -- if not unlocked yet, display condition
 		love.graphics.setColor(colorBox[1],colorBox[2],colorBox[3],210)
-		love.graphics.rectangle('fill',0,380,500,140)
+		love.graphics.rectangle('fill',xleft,380,xwidth,140)
 		local thresh = modi[selection].threshold
 		local prev = modi[selection-1].name
 		love.graphics.setColor(colorEmph)
@@ -145,8 +144,7 @@ function modeselect.draw()
 	-- box border
 	love.graphics.setColor(colorFG)
 	love.graphics.setLineWidth(2)
-	love.graphics.line(0,380,500,380)	
-
+	love.graphics.line(xleft,380,xwidth,380)	
 end
 
 function modeselect.update(dt)

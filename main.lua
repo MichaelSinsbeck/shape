@@ -15,11 +15,34 @@ function newGame()
 	timer = 0
 	score = 0
 	level = 0
-
 	states.explanation.goto()
 end
 
+function makeWindow()
+	if fullscreen then
+		local width, height = love.window.getDesktopDimensions( display )
+		local options = {fullscreen = true,fullscreentype = 'desktop'}
+		love.window.setMode( width,height, options)
+		scaling = math.min(height/520,width/500)
+		xShift = (width-(500*scaling))*0.5
+		yShift = (height-(520*scaling))*0.5
+		xleft = -(width/scaling-500)*0.5
+		xwidth = width/scaling
+	else
+		love.window.setMode( 500, 520 )
+		scaling = 1
+		xShift = 0
+		yShift = 0
+		xleft = 0
+		xwidth = 500
+	end
+end
+
 function love.load()
+	-- load state
+	loadFromFile()
+	makeWindow()
+	
 	-- initialize
 	--soundOn = true
 	initShapes()
@@ -40,9 +63,6 @@ function love.load()
 	smallFont = love.graphics.newFont('font/Caviar_Dreams_Bold.ttf',20)
 	tinyFont = love.graphics.newFont('font/Caviar_Dreams_Bold.ttf',11)
 	
-	-- load state
-	loadFromFile()
-
 	-- start game in menu
 	states.menu.goto()
 end
@@ -56,14 +76,15 @@ function loadFromFile()
 		end
 		lock = tonumber(content[1])
 		soundOn = (tonumber(content[2]) == 1)
+		fullscreen = (tonumber(content[3]) == 1)
 		customMode = {
 				name = 'custom',
-				nColor = tonumber(content[4]),
-				nShape = tonumber(content[5]),
-				nFill = tonumber(content[6]),
-				nLevels = tonumber(content[3]),
+				nColor = tonumber(content[5]),
+				nShape = tonumber(content[6]),
+				nFill = tonumber(content[7]),
+				nLevels = tonumber(content[4]),
 				threshold = 50000,
-				isRandom = (tonumber(content[7]) == 1)
+				isRandom = (tonumber(content[8]) == 1)
 				}		
 
 		--print(lock)
@@ -87,27 +108,30 @@ function loadFromFile()
 end
 
 function saveState()
-	local soundFlag
-	local randomFlag
+	local soundFlag = 0
+	local randomFlag = 0
+	local screenFlag = 0
 	if soundOn then
 		soundFlag = 1
-	else
-		soundFlag = 0
 	end
-
 	if customMode.isRandom then
 		randomFlag = 1
-	else
-		randomFlag = 0
 	end
+	if fullscreen then
+		screenFlag = 1
+	end
+	
 	love.filesystem.append('config.txt', randomFlag)
-	local output = lock ..'\n' .. soundFlag ..'\n' .. customMode.nLevels ..'\n' .. customMode.nColor ..'\n' .. customMode.nShape ..'\n' .. customMode.nFill ..'\n' .. randomFlag	..'\n'
+	local output = lock ..'\n' .. soundFlag ..'\n' .. screenFlag .. '\n' .. customMode.nLevels ..'\n' .. customMode.nColor ..'\n' .. customMode.nShape ..'\n' .. customMode.nFill ..'\n' .. randomFlag	..'\n'
 	
 	love.filesystem.write('config.txt', output)	
 end
 
 
 function love.draw()
+	love.graphics.translate(xShift,yShift)
+	love.graphics.scale(scaling)
+
 	if states[state] then
 		states[state].draw()
 	end

@@ -59,7 +59,7 @@ function registerKey(key)
 		
 		local thisShape = table.remove(thisLevel,1)
 		local xTarget
-		if key == 1 then xTarget = -50 else xTarget = 550 end
+		if key == 1 then xTarget = xleft-50 else xTarget = xwidth+50 end
 		table.insert(swipes,{shape = thisShape,x=250,xTarget=xTarget})
 	else -- wrong key
 		if comboPoint > 400 then
@@ -166,7 +166,7 @@ function game.draw()
 	else
 		-- box around score
 		love.graphics.setColor(colorBox)
-		love.graphics.rectangle('fill',0,0,260,180)
+		love.graphics.rectangle('fill',-5,-5,265,185)
 		love.graphics.setColor(colorFG)
 		love.graphics.setLineWidth(2)
 		love.graphics.rectangle('line',-5,-5,265,185)				
@@ -202,10 +202,10 @@ function game.draw()
 		
 		-- box around current shape
 		love.graphics.setColor(colorBox)
-		love.graphics.rectangle('fill',0,380,500,140)
+		love.graphics.rectangle('fill',xleft,380,xwidth,140)
 		love.graphics.setColor(colorFG)
 		love.graphics.setLineWidth(2)
-		love.graphics.line(0,380,500,380)			
+		love.graphics.line(xleft,380,xwidth,380)			
 		-- all the shapes
 		for i = math.min(#thisLevel,40),1,-1 do
 				v = thisLevel[i]
