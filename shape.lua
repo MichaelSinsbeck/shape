@@ -183,10 +183,11 @@ function initShapes()
 	outline[3] = {}
 	for i=0,4 do
 		local factor = 0.9
+		local ratio = 0.49
 		outline[3][4*i+1] = math.sin(i*math.pi*2/5) * factor
 		outline[3][4*i+2] = -math.cos(i*math.pi*2/5) * factor
-		outline[3][4*i+3] = 0.382*math.sin((i+0.5)*math.pi*2/5) * factor
-		outline[3][4*i+4] = 0.382*-math.cos((i+0.5)*math.pi*2/5)		 * factor
+		outline[3][4*i+3] = ratio*math.sin((i+0.5)*math.pi*2/5) * factor
+		outline[3][4*i+4] = ratio*-math.cos((i+0.5)*math.pi*2/5)		 * factor
 	end
 	-- circle
 	outline[4] = {}
@@ -233,23 +234,6 @@ function initShapes()
 			table.insert(outline[7],v)
 		end
 	end		
-							
-	-- flower
-	--[[outline[8] ={}
-	local r = 0.6
-	for i=1,6 do
-		local angle1 = i*math.pi/3
-		local cx = r*math.cos(angle1)
-		local cy = r*math.sin(angle1)
-		local nSeg = 15
-		for j=0,nSeg do
-			local angle2 = angle1 + (j/nSeg-0.5)*4*math.pi/3
-			local px = cx + 0.49*r*math.cos(angle2)
-			local py = cy + 0.49*r*math.sin(angle2)
-			table.insert(outline[8],px)
-			table.insert(outline[8],py)
-		end
-	end--]]
 	
 	-- half-moon
 	outline[8] = {}
