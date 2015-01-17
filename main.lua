@@ -63,6 +63,12 @@ function love.load()
 	colorEmph = {250,250,250}
 	love.graphics.setBackgroundColor(colorBG)
 	
+	-- test loading
+	local testList = loadScoreList('easy.txt')
+
+	saveScoreList('test.txt',testList)
+	loadScoreList('test.txt')
+	
 	-- start game in menu
 	states.menu.goto()
 end
@@ -154,5 +160,10 @@ function love.keypressed(key)
 	if states[state] then
 		states[state].keypressed(key)
 	end	
+end
 
+function love.textinput(text)
+	if states[state] and states[state].textinput then
+		states[state].textinput(text)
+	end
 end

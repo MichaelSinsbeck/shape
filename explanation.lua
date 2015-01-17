@@ -9,7 +9,7 @@ function explanation.goto()
 		return
 	end
 	level = level + 1
-	thisLevel = generateLevel(stages,level,level*8)
+	thisLevel = generateLevel(stages,level,level*2)
 	state = 'explanation'
 	started = false
 	aboutToQuit = false
