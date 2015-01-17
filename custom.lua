@@ -111,7 +111,7 @@ function custom.keypressed(key)
 		end
 		local maxLevels = math.min(customMode.nColor*customMode.nShape*customMode.nFill,16)
 		customMode.nLevels = math.min(customMode.nLevels,maxLevels)
-	elseif key == 'return' then
+	elseif key == 'return' or key == ' ' then
 		playSound('select')
 		saveState()		
 		stages = newOrder(customMode.nColor, customMode.nShape, customMode.nFill, customMode.nLevels)

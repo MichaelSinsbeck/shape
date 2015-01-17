@@ -1,4 +1,5 @@
 local highscore = {}
+local allLists = {}
 local list
 local maxListLength = 10
 local idxNew
@@ -13,7 +14,7 @@ function highscore.goto()
 	-- load highscore table from file if exists
 	if stages.name ~= 'custom' then
 		filename = stages.name .. '.txt'
-		list = loadScoreList(filename)		
+		list = getList(filename)		
 
 		-- check, if player is in highscore
 		if #list < maxListLength or score > list[#list].score then
@@ -37,6 +38,16 @@ function highscore.goto()
 	
 	  -- enable text input
 	end	
+end
+
+function getList(filename)
+	if allLists[name] then
+		return allLists[filename]
+	else
+		local thisList =	loadScoreList(filename)
+		allLists[filename] = thisList
+		return thisList
+	end
 end
 
 function loadScoreList(filename)
@@ -121,7 +132,7 @@ function highscore.draw()
 
 	love.graphics.setFont(largeFont)
 	love.graphics.setColor(colorEmph)
-	myPrint(score,0,450,500,'center')
+	myPrint(score,0,430,500,'center')
 
 
 end
@@ -145,6 +156,9 @@ function highscore.keypressed(key)
 	if idxNew and key == 'backspace' then
 		list[idxNew].name = deleteLastCharacter(list[idxNew].name)
 --		print(list[idxNew].name)
+	end
+	if not idxNew and key == ' ' then
+		states.unlock.goto()
 	end
 	if key == 'return' or key == 'escape' then
 		if idxNew then

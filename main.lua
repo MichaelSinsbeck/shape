@@ -62,13 +62,7 @@ function love.load()
 	colorFG = {180,180,180}
 	colorEmph = {250,250,250}
 	love.graphics.setBackgroundColor(colorBG)
-	
-	-- test loading
-	local testList = loadScoreList('easy.txt')
-
-	saveScoreList('test.txt',testList)
-	loadScoreList('test.txt')
-	
+		
 	-- start game in menu
 	states.menu.goto()
 end

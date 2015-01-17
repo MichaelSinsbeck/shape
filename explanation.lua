@@ -9,7 +9,7 @@ function explanation.goto()
 		return
 	end
 	level = level + 1
-	local levelLength = math.min(48,level*8)
+	local levelLength = math.min(48,level*2)
 	thisLevel = generateLevel(stages,level,levelLength)
 	state = 'explanation'
 	started = false
@@ -77,7 +77,7 @@ end
 
 function explanation.keypressed(key)
 	if key == 'escape' then
-		if not aboutToQuit then
+		if not aboutToQuit and level>1 then
 			aboutToQuit = true
 		else
 			states.modeselect.goto()

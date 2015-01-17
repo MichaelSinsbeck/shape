@@ -31,7 +31,7 @@ function unlock.update(dt)
 end
 
 function unlock.keypressed(key)
-	if key == 'return' or key == 'escape' then
+	if key == 'return' or key == 'escape' or key == ' ' then
 		states.modeselect.goto()
 	end
 end
