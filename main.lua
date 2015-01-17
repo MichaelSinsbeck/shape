@@ -36,6 +36,14 @@ function makeWindow()
 		xleft = 0
 		xwidth = 500
 	end
+	createFont()
+end
+
+function createFont()
+	logo = love.graphics.newImage('logo.png')
+	largeFont = love.graphics.newFont('font/CaviarDreams.ttf',50*scaling)	
+	smallFont = love.graphics.newFont('font/Caviar_Dreams_Bold.ttf',20*scaling)
+	tinyFont = love.graphics.newFont('font/Caviar_Dreams_Bold.ttf',11*scaling)
 end
 
 function love.load()
@@ -55,17 +63,16 @@ function love.load()
 	colorEmph = {250,250,250}
 	love.graphics.setBackgroundColor(colorBG)
 	
-
-	
-	-- load fonts and logo
-	logo = love.graphics.newImage('logo.png')
-	largeFont = love.graphics.newFont('font/CaviarDreams.ttf',50)	
-	smallFont = love.graphics.newFont('font/Caviar_Dreams_Bold.ttf',20)
-	tinyFont = love.graphics.newFont('font/Caviar_Dreams_Bold.ttf',11)
-	
 	-- start game in menu
 	states.menu.goto()
 end
+
+function myPrint(text,x,y,width,align)
+	love.graphics.push()
+	love.graphics.scale(1/scaling)
+	love.graphics.printf(text,x*scaling,y*scaling,width*scaling,align)
+	love.graphics.pop()
+end	
 
 function loadFromFile()
 	local filename = 'config.txt'

@@ -21,10 +21,10 @@ function explanation.draw()
 	else
 		love.graphics.setColor(colorEmph)
 		love.graphics.setFont(largeFont)
-		love.graphics.printf('Instructions',0,20,500,'center')
+		myPrint('Instructions',0,20,500,'center')
 		love.graphics.setColor(colorFG)		
 		love.graphics.setFont(smallFont)
-		love.graphics.printf('Sort the shapes with "left" and "right"\n\nForgot the shapes? Press "tab"\n\nBe fast and accurate for higher score',0,120,500,'center')		
+		myPrint('Sort the shapes with "left" and "right"\n\nForgot the shapes? Press "tab"\n\nBe fast and accurate for higher score',0,120,500,'center')		
 	end
 	love.graphics.setColor(colorFG)
 	local v = stages[level]
@@ -35,16 +35,16 @@ function explanation.draw()
 	end
 
 	--love.graphics.setFont(largeFont)
-	--love.graphics.printf('New shape goes ' .. button,0,240,500,'center')
+	--myPrint('New shape goes ' .. button,0,240,500,'center')
 	
 	if aboutToQuit then
 		love.graphics.setFont(tinyFont)
-		love.graphics.printf('Press "esc" again to quit',2,2,498,'left')
+		myPrint('Press "esc" again to quit',2,2,498,'left')
 	end
 	
 	-- press to continue
 	love.graphics.setFont(smallFont)
-	love.graphics.printf('Press "' .. button ..'" to continue',0,352,500,'center')
+	myPrint('Press "' .. button ..'" to continue',0,352,500,'center')
 	
 	-- Box
 	love.graphics.setColor(colorBox)

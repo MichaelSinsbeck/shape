@@ -139,8 +139,8 @@ end
 function game.drawOrder()
 	love.graphics.setFont(smallFont)
 	love.graphics.setColor(colorFG)
-	love.graphics.printf('left',0,10,225,'right')
-	love.graphics.printf('right',275,10,200,'left')
+	myPrint('left',0,10,225,'right')
+	myPrint('right',275,10,200,'left')
 	local count = {0,0}
 	for i=1,level do
 		local v = stages[i]
@@ -173,7 +173,7 @@ function game.draw()
 		-- total score
 		love.graphics.setColor(colorFG)
 		love.graphics.setFont(largeFont)
-		love.graphics.printf(score,0,20,230,'right')
+		myPrint(score,0,20,230,'right')
 		
 		-- new score
 		local height = math.min(timerToScore(timer),600)
@@ -182,22 +182,22 @@ function game.draw()
 		love.graphics.rectangle('fill',230-height/3,110,height/3,30)
 		love.graphics.setFont(smallFont)
 		love.graphics.setColor(colorEmph)
-		love.graphics.printf(timerToScore(timer),33,114,194,'right')
+		myPrint(timerToScore(timer),33,114,194,'right')
 		-- flying scores
 		for k,v in ipairs(flyingScores) do
 			local y = 74+40*math.exp(-v.timer*10)
 			love.graphics.setColor(colorEmph)
-			love.graphics.printf(v.score,33,y,194,'right')
+			myPrint(v.score,33,y,194,'right')
 		end		
 		-- press tab
 		love.graphics.setFont(tinyFont)
 		love.graphics.setColor(colorFG)
-		love.graphics.printf('Hold "tab" to see ordering',30,146,200,'left')
+		myPrint('Hold "tab" to see ordering',30,146,200,'left')
 		
 		-- press escape again to quit
 		if aboutToQuit then
 			love.graphics.setFont(tinyFont)
-		love.graphics.printf('Press "esc" again to quit',2,2,498,'left')
+		myPrint('Press "esc" again to quit',2,2,498,'left')
 		end
 		
 		-- box around current shape

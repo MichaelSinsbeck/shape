@@ -21,10 +21,10 @@ function unlock.draw()
 	love.graphics.setFont(largeFont)
 
 	love.graphics.setColor(colorEmph)
-	love.graphics.printf('New mode unlocked',0,20,500,'center')
+	myPrint('New mode unlocked',0,20,500,'center')
 	
 	love.graphics.setColor(colorFG)
-	love.graphics.printf(message,0,250,500,'center')
+	myPrint(message,0,250,500,'center')
 end
 
 function unlock.update(dt)

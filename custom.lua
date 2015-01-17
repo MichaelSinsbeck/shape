@@ -21,23 +21,23 @@ function custom.draw()
 	-- Explanation
 	love.graphics.setFont(tinyFont)
 	love.graphics.setColor(colorFG)
-	love.graphics.printf('left/right - change value',0,353,500,'center')
-	love.graphics.printf('return - start game',0,363,500,'center')
+	myPrint('left/right - change value',0,353,500,'center')
+	myPrint('return - start game',0,363,500,'center')
 	
 	-- Descriptions
 	local maxLevels = math.min(customMode.nColor*customMode.nShape*customMode.nFill,16)
 	love.graphics.setFont(smallFont)
 
-	love.graphics.printf('Levels',0,385,165,'right')
-	love.graphics.printf(customMode.nLevels,200,385,200,'left')
-	love.graphics.printf('Colors',0,410,165,'right')
-	love.graphics.printf('Shapes',0,435,165,'right')
-	love.graphics.printf('Styles',0,460,165,'right')
-	love.graphics.printf('Order',0,485,165,'right')
+	myPrint('Levels',0,385,165,'right')
+	myPrint(customMode.nLevels,200,385,200,'left')
+	myPrint('Colors',0,410,165,'right')
+	myPrint('Shapes',0,435,165,'right')
+	myPrint('Styles',0,460,165,'right')
+	myPrint('Order',0,485,165,'right')
 	if customMode.isRandom then
-		love.graphics.printf('random',200,485,200,'left')
+		myPrint('random',200,485,200,'left')
 	else
-		love.graphics.printf('stratified (easy)',200,485,200,'left')
+		myPrint('stratified (easy)',200,485,200,'left')
 	end
 
 	

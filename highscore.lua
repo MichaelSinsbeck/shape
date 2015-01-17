@@ -17,13 +17,13 @@ function highscore.draw()
 	-- what key to press
 	love.graphics.setColor(colorFG)
 	love.graphics.setFont(smallFont)
-	love.graphics.printf('press "return"',0,352,500,'center')
+	myPrint('press "return"',0,352,500,'center')
 
 	love.graphics.setFont(largeFont)	
-	love.graphics.printf('game over',0,390,500,'center')
+	myPrint('game over',0,390,500,'center')
 
 	love.graphics.setColor(colorEmph)
-	love.graphics.printf(score,0,450,500,'center')
+	myPrint(score,0,450,500,'center')
 
 
 end

@@ -63,16 +63,16 @@ function modeselect.draw()
 	-- Title line
 	love.graphics.setFont(largeFont)
 	love.graphics.setColor(colorEmph)
-	love.graphics.printf('Select mode',0,20,500,'center')
+	myPrint('Select mode',0,20,500,'center')
 	-- Mode names
 --	love.graphics.setColor(colorFG)
 	for k,v in ipairs(modi) do
 		if k <= lock then
 			love.graphics.setColor(colorFG)
-			love.graphics.printf(v.name,200,k*50+50,350,'left')
+			myPrint(v.name,200,k*50+50,350,'left')
 		else
 			love.graphics.setColor(colorBox)
-			love.graphics.printf(v.name,200,k*50+50,350,'left')
+			myPrint(v.name,200,k*50+50,350,'left')
 			love.graphics.setColor(colorFG)			
 			love.graphics.rectangle('fill',174,k*50+80,16,14)
 			love.graphics.setLineWidth(2)
@@ -98,16 +98,16 @@ function modeselect.draw()
 	-- Descriptions
 	love.graphics.setColor(colorFG)
 	love.graphics.setFont(smallFont)
-	love.graphics.printf('Levels',0,385,165,'right')
-	love.graphics.printf(modi[selection].nLevels,200,385,200,'left')
-	love.graphics.printf('Colors',0,410,165,'right')
-	love.graphics.printf('Shapes',0,435,165,'right')
-	love.graphics.printf('Styles',0,460,165,'right')
-	love.graphics.printf('Order',0,485,165,'right')
+	myPrint('Levels',0,385,165,'right')
+	myPrint(modi[selection].nLevels,200,385,200,'left')
+	myPrint('Colors',0,410,165,'right')
+	myPrint('Shapes',0,435,165,'right')
+	myPrint('Styles',0,460,165,'right')
+	myPrint('Order',0,485,165,'right')
 	if modi[selection].isRandom then
-		love.graphics.printf('random',200,485,200,'left')
+		myPrint('random',200,485,200,'left')
 	else
-		love.graphics.printf('stratified (easy)',200,485,200,'left')
+		myPrint('stratified (easy)',200,485,200,'left')
 	end
 	
 	love.graphics.setLineWidth(2)
@@ -138,7 +138,7 @@ function modeselect.draw()
 		local prev = modi[selection-1].name
 		love.graphics.setColor(colorEmph)
 		love.graphics.setFont(smallFont)
-		love.graphics.printf('Win ' .. thresh .. ' point in mode "' .. prev .. '" to unlock',0,435,500,'center')
+		myPrint('Win ' .. thresh .. ' point in mode "' .. prev .. '" to unlock',0,435,500,'center')
 	end
 	
 	-- box border

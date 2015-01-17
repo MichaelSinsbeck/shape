@@ -65,12 +65,12 @@ function menu.draw()
 	-- title line
 	love.graphics.setFont(largeFont)
 	love.graphics.setColor(colorEmph)
-	love.graphics.printf('Shape and Color',0,20,500,'center')
+	myPrint('Shape and Color',0,20,500,'center')
 	
 	-- options and cursor
 	love.graphics.setColor(colorFG)
 	for k,v in ipairs(options) do
-		love.graphics.printf(v.caption,180,k*50+50,350,'left')
+		myPrint(v.caption,180,k*50+50,350,'left')
 	end
 	drawShape(120,selection*50+23+60
 	,cursor.color,cursor.shape,cursor.fill,0.4)
@@ -86,7 +86,7 @@ function menu.draw()
 	love.graphics.draw(logo,410,450,0,.5,.5,100,100)
 	love.graphics.setColor(colorFG)
 	love.graphics.setFont(smallFont)
-	love.graphics.printf('A game by Michael Sinsbeck',0,470,400,'center')
+	myPrint('A game by Michael Sinsbeck',0,470,400,'center')
 end
 
 function menu.update(dt)
