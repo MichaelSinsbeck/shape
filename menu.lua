@@ -83,7 +83,7 @@ function menu.draw()
 	love.graphics.line(xleft,380,xwidth,380)
 	
 	love.graphics.setColor(colorEmph)
-	love.graphics.draw(logo,410,450,0,1,1,50,50)
+	love.graphics.draw(logo,410,450,0,.5,.5,100,100)
 	love.graphics.setColor(colorFG)
 	love.graphics.setFont(smallFont)
 	love.graphics.printf('A game by Michael Sinsbeck',0,470,400,'center')
