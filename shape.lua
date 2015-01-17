@@ -84,27 +84,8 @@ function newOrderStratified(nColor,nShape,nFill,nLevels,name)
 		end
 	end
 	-- assign directions
-	local first = love.math.random(2)
-	stages[1].direction = first
-	count={0,0}
-	count[first] = 1
-	for i=2,nLevels do
-		local thisDirection
-		if count[2] >= nLevels/2 or count[1] == 0 then
-			thisDirection = 1
-		elseif count[1] >= nLevels/2 or count[2] == 0 then
-			thisDirection = 2
-		else
---			if love.math.random() < count[1]/(count[1]+count[2]) then
-			if love.math.random() < 0.5 then
-				thisDirection = 2
-			else
-				thisDirection = 1
-			end
-		end
-		count[thisDirection] = count[thisDirection] + 1 
-		stages[i].direction = thisDirection
-	end	
+	assignDirections(stages)
+	
 	return stages
 end
 
@@ -138,35 +119,40 @@ function newOrderRandom(nColor,nShape,nFill,nLevels,name)
 		j = love.math.random(i,nStages)
 		stages[i],stages[j] =	stages[j],stages[i]
 	end
-	-- assign direction
+
+	for i=nLevels+1,nStages do
+		stages[i] = nil
+	end
+	
+	-- assign directions
+	assignDirections(stages)
+
+	return stages
+end
+
+function assignDirections(stageList)
+	local nLevels = #stageList
 	local first = love.math.random(2)
-	stages[1].direction = first
+	stageList[1].direction = first
 	count={0,0}
 	count[first] = 1
 	for i=2,nLevels do
 		local thisDirection
-		if count[2] >= nLevels/2 then
+		if count[2] >= nLevels/2 or count[2] > count[1]+1 or count[1] == 0 then
 			thisDirection = 1
-		elseif count[1] >= nLevels/2 then
+		elseif count[1] >= nLevels/2 or count[1] > count[2]+1 or count[2] == 0 then
 			thisDirection = 2
 		else
-			if love.math.random() < count[1]/(count[1]+count[2]) then
+			if love.math.random() < 0.5 then
 				thisDirection = 2
 			else
 				thisDirection = 1
 			end
 		end
 		count[thisDirection] = count[thisDirection] + 1 
-		stages[i].direction = thisDirection
+		stageList[i].direction = thisDirection
 	end
-	for i=nLevels+1,nStages do
-		stages[i] = nil
-	end
-	
-	--for k,v in ipairs(stages) do
-	--	print(v.color .. v.shape .. v.fill .. ', ' .. v.direction)
-	--end
-	return stages
+	return stageList
 end
 
 function generateLevel(stages,level,nShapes)
