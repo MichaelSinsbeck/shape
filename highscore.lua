@@ -77,63 +77,65 @@ function saveScoreList(filename,list)
 	love.filesystem.write(filename,output)
 end
 
+function drawHighscores(thisList,title)
+	-- title
+	love.graphics.setColor(colorEmph)
+	love.graphics.setFont(largeFont)
+	myPrint(title,0,20,500,'center')
+	-- show high score table
+	love.graphics.setFont(smallFont)
+
+	for k,v in ipairs(thisList) do
+		local y = 25*k+75
+		if k ~= idxNew then -- all old entries
+			love.graphics.setColor(colorFG)		
+			myPrint(v.score,0,y,165,'right')
+			myPrint(v.name,200,y,400,'left')
+		else -- the new entry
+			local extra = ''
+			if timer % 0.5 < 0.25 then
+				extra = '_'
+			end
+			love.graphics.setColor(colorEmph)
+			myPrint(v.score,0,y,165,'right')
+			myPrint(v.name .. extra,200,y,400,'left')
+		end
+	end
+	love.graphics.setColor(colorBox)
+	for i = #thisList+1,maxListLength do
+		local y = 25*i+75		
+		myPrint(0,0,y,165,'right')
+		myPrint('- empty -',200,y,400,'left')		
+	end
+end
+
 function highscore.draw()
 	
 	if love.keyboard.isDown('tab') then
 		-- shapes from before
 		states.game.drawOrder()
 	else
-		-- title
-		love.graphics.setColor(colorEmph)
-		love.graphics.setFont(largeFont)
-		myPrint('Game over',0,20,500,'center')
-		-- show high score table
-		love.graphics.setFont(smallFont)
-
-		for k,v in ipairs(list) do
-			local y = 25*k+75
-			if k ~= idxNew then -- all old entries
-				love.graphics.setColor(colorFG)		
-				myPrint(v.score,0,y,165,'right')
-				myPrint(v.name,200,y,400,'left')
-			else -- the new entry
-				local extra = ''
-				if timer % 0.5 < 0.25 then
-					extra = '_'
-				end
-				love.graphics.setColor(colorEmph)
-				myPrint(v.score,0,y,165,'right')
-				myPrint(v.name .. extra,200,y,400,'left')
-			end
-		end
+		drawHighscores(list,'Game over')
+	
+		-- box
 		love.graphics.setColor(colorBox)
-		for i = #list+1,maxListLength do
-			local y = 25*i+75		
-			myPrint(0,0,y,165,'right')
-			myPrint('- empty -',200,y,400,'left')		
-		end
+		love.graphics.rectangle('fill',xleft,380,xwidth,140)
+		love.graphics.setColor(colorFG)
+		love.graphics.setLineWidth(2)
+		love.graphics.line(xleft,380,xleft+xwidth,380)	
+	
+		-- what key to press
+		--love.graphics.setColor(colorFG)
+		--love.graphics.setFont(smallFont)
+		--myPrint('press "return"',0,352,500,'center')
+
+		love.graphics.setFont(smallFont)
+		myPrint('score:',0,390,500,'center')
+
+		love.graphics.setFont(largeFont)
+		love.graphics.setColor(colorEmph)
+		myPrint(score,0,430,500,'center')
 	end
-	
-	
-	-- box
-	love.graphics.setColor(colorBox)
-	love.graphics.rectangle('fill',xleft,380,xwidth,140)
-	love.graphics.setColor(colorFG)
-	love.graphics.setLineWidth(2)
-	love.graphics.line(xleft,380,xleft+xwidth,380)	
-	
-	-- what key to press
-	--love.graphics.setColor(colorFG)
-	--love.graphics.setFont(smallFont)
-	--myPrint('press "return"',0,352,500,'center')
-
-	love.graphics.setFont(smallFont)
-	myPrint('score:',0,390,500,'center')
-
-	love.graphics.setFont(largeFont)
-	love.graphics.setColor(colorEmph)
-	myPrint(score,0,430,500,'center')
-
 
 end
 
