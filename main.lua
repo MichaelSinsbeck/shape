@@ -144,11 +144,14 @@ function love.draw()
 
 	love.graphics.setColor(colorBG)
 	love.graphics.rectangle('fill',xleft,0,xwidth,520)
+				
+	love.graphics.setScissor( xleft*scaling+xShift, 0, xwidth*scaling, 520*scaling )
 	
 	if states[state] then
 		states[state].draw()
 	end
 	
+	love.graphics.setScissor( )
 	love.graphics.setColor(colorFG)
 	love.graphics.setLineWidth(2)
 	love.graphics.line(xleft,0,xleft,520)
