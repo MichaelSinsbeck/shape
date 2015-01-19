@@ -25,14 +25,14 @@ function explanation.draw()
 		myPrint('Instructions',0,20,500,'center')
 		love.graphics.setColor(colorFG)		
 		love.graphics.setFont(smallFont)
-		myPrint('Sort the shapes with "left" and "right"\n\nForgot the shapes? Press "tab"\n\nBe fast and accurate for higher score',0,120,500,'center')		
+		myPrint('Sort the shapes with left/q and right/p\n\nForgot the shapes? Press "tab"\n\nBe fast and accurate for higher score',0,120,500,'center')		
 	end
 	love.graphics.setColor(colorFG)
 	local v = stages[level]
 	if v.direction == 1 then
-		button = 'left'
+		button = 'left/q'
 	else
-		button = 'right'
+		button = 'right/p'
 	end
 
 	--love.graphics.setFont(largeFont)
@@ -40,12 +40,12 @@ function explanation.draw()
 	
 	if aboutToQuit then
 		love.graphics.setFont(tinyFont)
-		myPrint('Press "esc" again to quit',2,2,498,'left')
+		myPrint('Press esc again to quit',2,2,498,'left')
 	end
 	
 	-- press to continue
 	love.graphics.setFont(smallFont)
-	myPrint('Press "' .. button ..'" to continue',0,352,500,'center')
+	myPrint('Press ' .. button ..' to continue',0,352,500,'center')
 	
 	-- Box
 	love.graphics.setColor(colorBox)
@@ -86,10 +86,15 @@ function explanation.keypressed(key)
 	else
 		aboutToQuit = false
 	end
-	if key == button then
+	local v = stages[level]
+	if v.direction == 1 and (key=='left' or key=='q') then
 		playSound('select')
 		states.game.goto()
 	end
+	if v.direction == 2 and (key=='right' or key=='p') then
+		playSound('select')
+		states.game.goto()
+	end	
 end
 
 return explanation

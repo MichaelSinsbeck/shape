@@ -90,9 +90,9 @@ function game.keypressed(key)
 	else
 		aboutToQuit = false
 	end
-	if key == 'left' then
+	if key == 'left' or key == 'q' then
 		registerKey(1)
-	elseif key == 'right' then
+	elseif key == 'right' or key == 'p' then
 		registerKey(2)
 	end
 end

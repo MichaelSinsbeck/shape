@@ -150,6 +150,7 @@ function love.draw()
 	end
 	
 	love.graphics.setColor(colorFG)
+	love.graphics.setLineWidth(2)
 	love.graphics.line(xleft,0,xleft,520)
 	love.graphics.line(xleft+xwidth,0,xleft+xwidth,520)	
 end

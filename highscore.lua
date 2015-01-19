@@ -6,7 +6,7 @@ local idxNew
 local timer = 0
 local filename
 local replacementNames =
-	{'prefers to be anonymous','too lazy to type','John Doe','1337h4x0r'}
+	{'prefers to be anonymous','too lazy to type','John Doe','1337h4x0r','y u no enter name?'}
 
 function highscore.goto()
 	state = 'highscore'
