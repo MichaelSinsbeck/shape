@@ -80,7 +80,7 @@ function menu.draw()
 	love.graphics.rectangle('fill',xleft,380,xwidth,140)
 	love.graphics.setColor(colorFG)
 	love.graphics.setLineWidth(2)
-	love.graphics.line(xleft,380,xwidth,380)
+	love.graphics.line(xleft,380,xleft+xwidth,380)
 	
 	love.graphics.setColor(colorEmph)
 	love.graphics.draw(logo,410,450,0,.5,.5,100,100)

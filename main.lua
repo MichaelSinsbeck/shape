@@ -26,8 +26,11 @@ function makeWindow()
 		scaling = math.min(height/520,width/500)
 		xShift = (width-(500*scaling))*0.5
 		yShift = (height-(520*scaling))*0.5
-		xleft = -(width/scaling-500)*0.5
-		xwidth = width/scaling
+		
+		--xleft = -(width/scaling-500)*0.5
+		--xwidth = width/scaling
+		xleft = -5
+		xwidth = 510
 	else
 		love.window.setMode( 500, 520 )
 		scaling = 1
@@ -61,7 +64,7 @@ function love.load()
 	colorBox = {45,45,55}
 	colorFG = {180,180,180}
 	colorEmph = {250,250,250}
-	love.graphics.setBackgroundColor(colorBG)
+	--love.graphics.setBackgroundColor(colorBG)
 		
 	-- start game in menu
 	states.menu.goto()
@@ -139,9 +142,16 @@ function love.draw()
 	love.graphics.translate(xShift,yShift)
 	love.graphics.scale(scaling)
 
+	love.graphics.setColor(colorBG)
+	love.graphics.rectangle('fill',xleft,0,xwidth,520)
+	
 	if states[state] then
 		states[state].draw()
 	end
+	
+	love.graphics.setColor(colorFG)
+	love.graphics.line(xleft,0,xleft,520)
+	love.graphics.line(xleft+xwidth,0,xleft+xwidth,520)	
 end
 
 function love.update(dt)

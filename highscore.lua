@@ -120,7 +120,7 @@ function highscore.draw()
 	love.graphics.rectangle('fill',xleft,380,xwidth,140)
 	love.graphics.setColor(colorFG)
 	love.graphics.setLineWidth(2)
-	love.graphics.line(xleft,380,xwidth,380)	
+	love.graphics.line(xleft,380,xleft+xwidth,380)	
 	
 	-- what key to press
 	--love.graphics.setColor(colorFG)
