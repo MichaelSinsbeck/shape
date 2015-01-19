@@ -9,7 +9,7 @@ function explanation.goto()
 		return
 	end
 	level = level + 1
-	local levelLength = math.min(48,level*2)
+	local levelLength = math.min(48,level*8)
 	thisLevel = generateLevel(stages,level,levelLength)
 	state = 'explanation'
 	started = false
