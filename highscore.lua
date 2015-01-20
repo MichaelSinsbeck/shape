@@ -124,11 +124,6 @@ function highscore.draw()
 		love.graphics.setLineWidth(2)
 		love.graphics.line(xleft,380,xleft+xwidth,380)	
 	
-		-- what key to press
-		--love.graphics.setColor(colorFG)
-		--love.graphics.setFont(smallFont)
-		--myPrint('press "return"',0,352,500,'center')
-
 		love.graphics.setFont(smallFont)
 		myPrint('score:',0,390,500,'center')
 

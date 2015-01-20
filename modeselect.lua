@@ -103,12 +103,12 @@ function modeselect.draw()
 		-- Descriptions
 		love.graphics.setColor(colorFG)
 		love.graphics.setFont(smallFont)
-		myPrint('Colors',0,385,165,'right')
-		myPrint('Shapes',0,410,165,'right')
-		myPrint('Styles',0,435,165,'right')
-		myPrint('Levels',0,460,165,'right')
+		myPrint('colors',0,385,165,'right')
+		myPrint('shapes',0,410,165,'right')
+		myPrint('styles',0,435,165,'right')
+		myPrint('levels',0,460,165,'right')
 		myPrint(modi[selection].nLevels,200,460,200,'left')	
-		myPrint('Order',0,485,165,'right')
+		myPrint('ordering',0,485,165,'right')
 		if modi[selection].isRandom then
 			myPrint('random',200,485,200,'left')
 		else
@@ -143,7 +143,7 @@ function modeselect.draw()
 			local prev = modi[selection-1].name
 			love.graphics.setColor(colorEmph)
 			love.graphics.setFont(smallFont)
-			myPrint('Win ' .. thresh .. ' point in mode "' .. prev .. '" to unlock',0,435,500,'center')
+			myPrint('Win ' .. thresh .. ' point in "' .. prev .. '" mode to unlock',0,435,500,'center')
 		end
 	
 		-- box border
@@ -155,7 +155,7 @@ function modeselect.draw()
 		if selection ~= 5 and not love.keyboard.isDown('h') then
 			love.graphics.setFont(tinyFont)
 			love.graphics.setColor(colorFG)
-			myPrint('hold h to see highscore table',0,363,500,'center')
+			myPrint('Hold h to see highscore table',0,363,500,'center')
 		end		
 end
 

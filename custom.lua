@@ -29,12 +29,12 @@ function custom.draw()
 	love.graphics.setFont(smallFont)
 
 
-	myPrint('Colors',0,385,165,'right')
-	myPrint('Shapes',0,410,165,'right')
-	myPrint('Styles',0,435,165,'right')
-	myPrint('Levels',0,460,165,'right')
+	myPrint('colors',0,385,165,'right')
+	myPrint('shapes',0,410,165,'right')
+	myPrint('styles',0,435,165,'right')
+	myPrint('levels',0,460,165,'right')
 	myPrint(customMode.nLevels,200,460,200,'left')	
-	myPrint('Order',0,485,165,'right')
+	myPrint('ordering',0,485,165,'right')
 	if customMode.isRandom then
 		myPrint('random',200,485,200,'left')
 	else

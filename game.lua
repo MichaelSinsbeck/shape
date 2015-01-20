@@ -192,12 +192,12 @@ function game.draw()
 		-- press tab
 		love.graphics.setFont(tinyFont)
 		love.graphics.setColor(colorFG)
-		myPrint('Hold "tab" to see ordering',30,146,200,'left')
+		myPrint('Hold tab to see ordering',30,146,200,'left')
 		
 		-- press escape again to quit
 		if aboutToQuit then
 			love.graphics.setFont(tinyFont)
-		myPrint('Press "esc" again to quit',2,2,498,'left')
+		myPrint('Press esc again to quit',2,2,498,'left')
 		end
 		
 		-- box around current shape

@@ -25,7 +25,7 @@ function explanation.draw()
 		myPrint('Instructions',0,20,500,'center')
 		love.graphics.setColor(colorFG)		
 		love.graphics.setFont(smallFont)
-		myPrint('Sort the shapes with left/q and right/p\n\nForgot the shapes? Press "tab"\n\nBe fast and accurate for higher score',0,120,500,'center')		
+		myPrint('Sort the shapes with left/q and right/p\n\nForgot the shapes? Hold tab\n\nBe fast and accurate for higher score',0,120,500,'center')		
 	end
 	love.graphics.setColor(colorFG)
 	local v = stages[level]
