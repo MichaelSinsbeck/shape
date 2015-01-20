@@ -1,13 +1,13 @@
 states = {}
-states.game = require('game')
-states.explanation = require('explanation')
-states.highscore = require('highscore')
-states.menu = require('menu')
-states.modeselect = require('modeselect')
-states.custom = require('custom')
-states.unlock = require('unlock')
-require('shape')
-require('sound')
+states.game = require('scripts/game')
+states.explanation = require('scripts/explanation')
+states.highscore = require('scripts/highscore')
+states.menu = require('scripts/menu')
+states.modeselect = require('scripts/modeselect')
+states.custom = require('scripts/custom')
+states.unlock = require('scripts/unlock')
+require('scripts/shape')
+require('scripts/sound')
 
 
 function newGame()
@@ -43,7 +43,7 @@ function makeWindow()
 end
 
 function createFont()
-	logo = love.graphics.newImage('logo.png')
+	logo = love.graphics.newImage('images/logo.png')
 	largeFont = love.graphics.newFont('font/CaviarDreams.ttf',50*scaling)	
 	smallFont = love.graphics.newFont('font/Caviar_Dreams_Bold.ttf',20*scaling)
 	tinyFont = love.graphics.newFont('font/Caviar_Dreams_Bold.ttf',11*scaling)
